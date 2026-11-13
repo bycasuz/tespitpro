@@ -89,6 +89,7 @@ function kirlet() { kirli = true; durumEl.textContent = "Kaydedilmemiş değişi
 function bilgi(m, hata) { durumEl.textContent = m; durumEl.style.color = hata ? "#FFB4A8" : "#B9C6D6"; }
 const sadeYazi = (s) => String(s || "").replace(/<[^>]+>/g, "").slice(0, 60);
 
+const TR = { ad: "İşletme adı", slogan: "Slogan", tel: "Telefon (uluslararası, +90…)", telGor: "Telefon (sitede görünen)", waMesaj: "WhatsApp hazır mesajı", site: "Site adresi", mapsCid: "Google Haritalar linki", yorumYaz: "Google yorum yazma linki", placeId: "Google Place ID", adres: "Adres", lat: "Enlem", lng: "Boylam", baslik: "Başlık", metin: "Metin", alt: "Görsel açıklaması (alt)", foto: "Fotoğraf", aciklama: "Açıklama", giris: "Giriş metni", h1: "Sayfa başlığı (H1)", dosya: "Dosya adı", ozet: "Özet", slug: "Adres kısaltması (slug)" };
 function alan(etiket, o, k, tip = "text", ipucu = "") {
   const id = "f" + (++sayac.n);
   let g;
@@ -96,7 +97,7 @@ function alan(etiket, o, k, tip = "text", ipucu = "") {
   else if (tip === "num") { g = el("input", { id, type: "number", step: "any", oninput: (e) => { o[k] = Number(e.target.value); kirlet(); } }); g.value = o[k] ?? ""; }
   else if (tip === "ro") { g = el("input", { id, readonly: true }); g.value = o[k] ?? ""; }
   else { g = el("input", { id, type: "text", oninput: (e) => { o[k] = e.target.value; kirlet(); } }); g.value = o[k] ?? ""; }
-  return el("div", { class: "alan" }, el("label", { for: id }, etiket), g, ipucu ? el("small", {}, ipucu) : null);
+  return el("div", { class: "alan" }, el("label", { for: id }, TR[etiket] || etiket), g, ipucu ? el("small", {}, ipucu) : null);
 }
 function ikonlar(dizi, i, yenile) {
   return el("span", { class: "ik" },
