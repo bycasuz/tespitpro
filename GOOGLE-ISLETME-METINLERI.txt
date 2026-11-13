@@ -1,0 +1,52 @@
+TESPITPRO — GOOGLE İŞLETME PROFİLİ DÜZELTMELERİ (onayınla uygulanacak)
+=====================================================================
+
+1) KATEGORİ
+   Birincil : "Su kaçağı tespit" içeren kategori varsa o (Profilde kategori kutusuna "sızıntı" / "kaçak" yazıp çıkanlara bak)
+   Ek       : Tesisatçı
+   Not      : İşletme ADINA anahtar kelime EKLEME ("TespitPro" kalsın) — kapatılma riski.
+
+2) WEB SİTESİ
+   https://bycasuz.github.io/tespitpro/   (yayınlanınca)
+
+3) AÇIKLAMA (750 karakter sınırı)
+TespitPro, Bahçelievler Şirinevler'deki merkezinden Bahçelievler, Esenler, Yenibosna, Güngören ve Bakırköy'e 7 gün 24 saat su kaçağı tespiti hizmeti verir. Kaçağın yerini akustik dinleme cihazı ve kamerayla duvarı ya da zemini kırmadan buluyor, size gösteriyor ve onayınızla yalnızca o noktayı açarak onarıyoruz. Alt kata su sızması, sebepsiz yükselen su faturası, duvarda nem ve küf, bina girişi ve ana hat kaçakları en sık çözdüğümüz sorunlardır. Gece ve hafta sonu da geliyoruz.
+
+4) HİZMETLER (her biri ayrı hizmet, açıklamalı)
+   - Kırmadan su kaçağı tespiti — Cihaz ve kamerayla kaçağın yerini kırmadan bulma.
+   - Kameralı su kaçağı tespiti — Boru ve giderleri kamerayla inceleyip sızıntıyı gösterme.
+   - Su kaçağı onarımı — Yalnızca kaçak noktasını açıp tamir.
+   - Alt kata su sızması tespiti — Banyo, mutfak, kombi hattında kaynağı bulma.
+   - Yüksek su faturası kontrolü — Sayaç ve hat testiyle gizli kaçağı bulma.
+   - Bina girişi / ana hat kaçağı — Bahçe ve apartman girişindeki kaçaklar.
+
+5) HİZMET BÖLGELERİ
+   Bahçelievler, Esenler, Güngören, Bakırköy, Bağcılar (İstanbul)
+
+6) YORUM İSTEME (her işten sonra WhatsApp'tan)
+Merhaba, TespitPro'dan yazıyorum. Bugünkü işimizden memnun kaldıysanız Google'da birkaç cümleyle yorum yazmanız bize çok yardımcı olur 🙏 Hangi sorunu çözdüğümüzü ve hangi semtte olduğunuzu yazarsanız (ör. "Şirinevler'de alt kata su sızıyordu") benzer sorunu yaşayanlar bizi daha kolay bulur.
+https://search.google.com/local/writereview?placeid=ChIJu-e2S3qlyhQRqUqEAdVxJaA
+   Kural: Para/indirim karşılığı yorum isteme, yorum yazdırma, toplu yorum YOK — Google siler/cezalandırır.
+
+7) HAFTALIK GÖNDERİLER (fotoğrafla, "Ara" butonlu)
+   H1: Alt kata su mu sızıyor? Fayans kırdırmadan önce kaçağın yerini cihazla buldurun. Şirinevler merkezliyiz, 7/24 geliyoruz.
+   H2: Su faturanız sebepsiz yükseldiyse tüm muslukları kapatıp sayaca bakın; dönüyorsa gizli kaçak var. Bahçelievler'de kırmadan tespit ediyoruz.
+   H3: Bu hafta Esenler'de bina girişindeki ana hat kaçağını kamerayla bulup onardık. (iş fotoğrafı)
+   H4: Kırmadan tespit nedir? Cihazla dinleyip kamerayla bakıyor, yalnızca kaçağın olduğu noktayı açıyoruz.
+
+8) DİZİN KAYITLARI (hepsinde AYNI ad/adres/telefon)
+   Ad      : TespitPro
+   Adres   : Şirinevler Mah. Yeşilbağ Sk. No:11 D:A, 34188 Bahçelievler/İstanbul
+   Telefon : 0541 373 00 69
+   Saat    : Her gün 24 saat
+   Site    : https://bycasuz.github.io/tespitpro/
+   Kayıt   : Bing Places (Google'dan içe aktar), Apple Business Connect, Yandex Sprav,
+             Foursquare, Armut (hizmet veren ol), Cylex, Bulurum
+
+9) KURAL DIŞI RAKİPLER (Haritalar'da "Düzenleme öner → Ad" ile bildir)
+   Adı anahtar kelimeyle doldurulmuş kayıtlar, ör.:
+   - "Esenler - Kırmadan Su Kaçağı Tespiti İletişim"
+   - "Güngören - Kırmadan Su Kaçağı Tespiti İletişim"
+   - "Kırmadan su kaçağı tespiti ve tıkanıklık açma"
+   - "Bahçelievler - Su Tesisatçısı ve Su Kaçağı Tespiti"
+   Gerçek adres/işletme yoksa "Bu yer mevcut değil" bildir.

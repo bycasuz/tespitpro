@@ -1,8 +1,8 @@
 # TespitPro
 
-> Bahçelievler Şirinevler merkezli kırmadan su kaçağı tespiti ve onarımı. 7/24. Telefon 0541 373 00 69. Adres: Şirinevler Mah. Yeşilbağ Sk. No:11 D:A, 34188 Bahçelievler / İstanbul.
+> Bahçelievler Şirinevler merkezli kırmadan su kaçağı tespiti (termal kamera, akustik dinleme, kameralı inceleme) ve noktasal onarım. 7/24. Google puanı 5,0 (42 yorum). Telefon 0541 373 00 69. Adres: Şirinevler Mah. Yeşilbağ Sk. No:11 D:A, 34188 Bahçelievler / İstanbul.
 
-- [Kırmadan su kaçağı tespiti — Bahçelievler, Şirinevler, Esenler](https://bycasuz.github.io/tespitpro/)
+- [Kırmadan su kaçağı tespiti](https://bycasuz.github.io/tespitpro/)
 - [Bahçelievler su kaçağı tespiti](https://bycasuz.github.io/tespitpro/bahcelievler-su-kacagi-tespiti.html)
 - [Şirinevler su kaçağı tespiti](https://bycasuz.github.io/tespitpro/sirinevler-su-kacagi-tespiti.html)
 - [Esenler su kaçağı tespiti](https://bycasuz.github.io/tespitpro/esenler-su-kacagi-tespiti.html)
