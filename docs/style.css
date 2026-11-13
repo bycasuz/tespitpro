@@ -388,3 +388,5 @@ section[id],[id="talep"],[id="sss"]{scroll-margin-top:110px}
   .sohbet-ac span{display:none}
   .sohbet-ac svg{width:28px;height:28px}
 }
+
+.telif{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}.imza a{text-decoration:underline;text-underline-offset:3px}

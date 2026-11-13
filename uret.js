@@ -70,8 +70,8 @@ ${s.dosya === "index.html" ? "" : `<script type="application/ld+json">${JSON.str
 <a class="atla" href="#icerik">İçeriğe geç</a>
 <div class="duyuru"><span class="canli" aria-hidden="true"></span>Merkez: Şirinevler · 7/24 su kaçağı tespiti</div>
 <header class="ust" id="ust"><div class="kap">
-<a class="logo" href="./" aria-label="TespitPro ana sayfa">${IK.logo}<span>Tespit<b>pro</b></span></a>
-<nav class="menu" aria-label="Ana menü"><a href="./#yontem">Nasıl buluyoruz</a><a href="./#galeri">Sahadan</a><a href="./#yorumlar">Yorumlar</a><a href="./#bolgeler">Bölgeler</a><a href="./#sss">SSS</a><a href="#talep">Talep oluştur</a></nav>
+<a class="logo" href="index.html" aria-label="TespitPro ana sayfa">${IK.logo}<span>Tespit<b>pro</b></span></a>
+<nav class="menu" aria-label="Ana menü"><a href="index.html#yontem">Nasıl buluyoruz</a><a href="index.html#galeri">Sahadan</a><a href="index.html#yorumlar">Yorumlar</a><a href="index.html#bolgeler">Bölgeler</a><a href="index.html#sss">SSS</a><a href="#talep">Talep oluştur</a></nav>
 <a class="btn btn-ana" href="tel:${TEL}">${IK.tel}<span>${TEL_GOR}</span></a>
 </div></header>
 <div class="termal-cizgi" aria-hidden="true"></div>
@@ -114,7 +114,7 @@ ${J.slider.map((s, i) => `<div class="slayt" role="group" aria-roledescription="
 </div></div></section>`;
 
 const rehberHero = (s) => `<section class="hero"><div class="kap">
-<div><div class="cipler"><a class="cip" href="./">← Ana sayfa</a></div><h1>${s.h1}</h1><p class="giris">${s.giris}</p>
+<div><div class="cipler"><a class="cip" href="index.html">← Ana sayfa</a></div><h1>${s.h1}</h1><p class="giris">${s.giris}</p>
 <div class="btnler"><a class="btn btn-ana" href="tel:${TEL}">${IK.tel}Hemen ara</a><a class="btn btn-wa" href="${WA}">${IK.wa}WhatsApp'tan yaz</a></div></div>
 <div class="hero-gorsel"><div class="cerceve">${resim(s.heroFoto, s.heroAlt, { oncelik: true })}</div></div>
 </div></section>`;
@@ -279,10 +279,10 @@ if(sb){
 
 const alt = () => `</main>
 <footer class="alt-bilgi"><div class="kap">
-<div><a class="logo" href="./">${IK.logo}<span>Tespit<b>pro</b></span></a><p>Kırmadan su kaçağı tespiti ve noktasal onarım.<br>${ADRES}</p><p style="margin-top:10px"><a href="tel:${TEL}">${TEL_GOR}</a> · Her gün 24 saat</p></div>
+<div><a class="logo" href="index.html">${IK.logo}<span>Tespit<b>pro</b></span></a><p>Kırmadan su kaçağı tespiti ve noktasal onarım.<br>${ADRES}</p><p style="margin-top:10px"><a href="tel:${TEL}">${TEL_GOR}</a> · Her gün 24 saat</p></div>
 <div><h3>Bölgeler</h3><ul>${J.bolgeler.filter((b) => b.sayfa).map((b) => `<li><a href="${b.sayfa}">${b.ad} su kaçağı tespiti</a></li>`).join("")}<li><a href="su-kacagi-rehberi.html">Su kaçağı rehberi</a></li></ul></div>
 <div><h3>Google</h3><ul><li><a href="${MAPS}">Haritalar'da yol tarifi</a></li><li><a href="${MAPS}">Google yorumları (${puanY()} ★)</a></li><li><a href="${YORUM_YAZ}">Yorum yazın</a></li></ul></div>
-<p class="telif">© ${new Date().getFullYear()} TespitPro. Fotoğraflar TespitPro'ya aittir.</p>
+<p class="telif">© ${new Date().getFullYear()} TespitPro. Fotoğraflar TespitPro'ya aittir. <span class="imza">Site tasarım: <a href="https://www.erenkoybilgisayar.com.tr/">Erenköy Bilgisayar Teknik Servis</a></span></p>
 </div></footer>
 <div class="sabit"><a class="btn btn-ana" href="tel:${TEL}">${IK.tel}Ara</a><a class="btn btn-wa" href="${WA}">${IK.wa}WhatsApp</a></div>
 <script>
