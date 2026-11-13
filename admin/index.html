@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="tr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TespitPro Yönetim</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--lacivert:#0B2545;--turuncu:#F26B1D;--turuncu-acik:#FFE7D6;--zemin:#F6F3EE;--kart:#fff;--yazi:#0E1B2C;--soluk:#4F5B69;--cizgi:#E4DED5;--yesil:#128C4A;--kirmizi:#B42318;--r-m:14px;--font:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--zemin:#0E1B2C;--kart:#13233A;--yazi:#EEF2F7;--soluk:#A9B6C7;--cizgi:#27395A;--turuncu-acik:#3A2A1E}}
+:root[data-theme="dark"]{--zemin:#0E1B2C;--kart:#13233A;--yazi:#EEF2F7;--soluk:#A9B6C7;--cizgi:#27395A;--turuncu-acik:#3A2A1E}
+body{margin:0;font:400 15px/1.5 var(--font);background:var(--zemin);color:var(--yazi)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--turuncu);outline-offset:2px}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 18px;background:var(--lacivert);color:#fff}
+header h1{font-size:1.1rem;margin:0 auto 0 0}
+header .durum{font-size:.9rem;color:#B9C6D6}
+.dugme{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--cizgi);background:var(--kart);cursor:pointer;font-weight:700}
+.dugme.ana{background:var(--turuncu);border-color:var(--turuncu);color:var(--lacivert)}
+.dugme:disabled{opacity:.5;cursor:default}
+.btn-ik{min-height:34px;padding:0 12px;border-radius:8px;border:1px solid var(--cizgi);background:var(--kart);cursor:pointer;font-weight:600}
+.btn-ik:disabled{opacity:.4;cursor:default}
+.duzen{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 60px)}
+nav{border-right:1px solid var(--cizgi);padding:12px;display:flex;flex-direction:column;gap:4px;background:var(--kart)}
+nav button{text-align:left;min-height:40px;padding:0 12px;border-radius:10px;border:0;background:transparent;cursor:pointer;font-weight:600;color:var(--soluk)}
+nav button[aria-selected="true"]{background:var(--turuncu-acik);color:var(--yazi)}
+main{padding:20px 24px 60px;max-width:960px;min-width:0}
+main h2{font-size:1.4rem;margin:0 0 14px;color:var(--lacivert)}
+:root[data-theme="dark"] main h2,.dark-h2{color:var(--yazi)}
+.blok{background:var(--kart);border:1px solid var(--cizgi);border-radius:var(--r-m);padding:16px 18px;margin-bottom:16px}
+.blok>h3{margin:0 0 10px;font-size:1.02rem}
+.alan{display:flex;flex-direction:column;gap:5px;margin-bottom:10px;min-width:0}
+.alan>.etiket,.alan>label{font-weight:700;font-size:.9rem}
+.alan small{color:var(--soluk);font-size:.82rem}
+input,select,textarea{width:100%;min-height:40px;padding:8px 10px;border-radius:8px;border:1px solid var(--cizgi);background:var(--kart)}
+textarea{min-height:76px;resize:vertical}
+input:read-only{opacity:.6}
+.liste{display:flex;flex-direction:column;gap:8px}
+.satir{display:flex;gap:8px;align-items:flex-start}
+.satir>input,.satir>textarea{flex:1}
+.ik{display:flex;gap:4px;flex:none}
+.kart-satir{border:1px solid var(--cizgi);border-radius:12px;padding:12px;margin:0 0 10px;min-width:0}
+.kart-satir>legend{font-weight:700;padding:0 6px;color:var(--lacivert)}
+:root[data-theme="dark"] .kart-satir>legend,.kart-satir>legend{color:var(--yazi)}
+.kart-satir .ik{justify-content:flex-end;margin-top:4px}
+.foto-sec{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.foto-sec img{width:96px;height:72px;object-fit:cover;border-radius:8px;background:var(--cizgi)}
+.foto-sec code{font-size:.85rem}
+.izgara{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.izgara button,.izgara figure{margin:0;border:1px solid var(--cizgi);border-radius:10px;background:var(--kart);padding:6px;cursor:pointer;text-align:left;font-size:.82rem;word-break:break-all}
+.izgara img{width:100%;height:96px;object-fit:cover;border-radius:6px;display:block;margin-bottom:4px;background:var(--cizgi)}
+.kaplama{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;z-index:20;padding:16px}
+.kaplama>div{background:var(--kart);border-radius:var(--r-m);padding:18px;max-width:720px;width:100%;max-height:86vh;overflow:auto}
+.uyari{padding:10px 14px;border-radius:10px;margin:0 0 14px;background:var(--turuncu-acik)}
+.hata{color:var(--kirmizi);font-weight:700}
+.onizleme{width:100%;height:70vh;border:1px solid var(--cizgi);border-radius:var(--r-m);background:#fff}
+pre{white-space:pre-wrap;background:var(--kart);border:1px solid var(--cizgi);border-radius:10px;padding:10px;font-size:.85rem;max-height:220px;overflow:auto}
+.satir-ust{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+@media (max-width:760px){.duzen{grid-template-columns:1fr}nav{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--cizgi)}nav button{white-space:nowrap}main{padding:16px}}
+</style>
+</head><body>
+<header>
+<h1>TespitPro Yönetim</h1>
+<span class="durum" id="durum" role="status">Yükleniyor…</span>
+<button class="dugme" id="geriAl" type="button">Geri al</button>
+<button class="dugme ana" id="kaydet" type="button">Kaydet</button>
+</header>
+<div class="duzen">
+<nav id="menu" role="tablist" aria-label="Bölümler"></nav>
+<main id="icerik" role="tabpanel" aria-live="polite"></main>
+</div>
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+const sayac = { n: 0 };
+let D = null, G = {}, FOTO = { ham: [], web: [] }, kirli = false, aktif = "firma";
+const durumEl = $("#durum");
+
+function el(t, a, ...c) {
+  const e = document.createElement(t);
+  for (const [k, v] of Object.entries(a || {})) {
+    if (v === false || v == null) continue;
+    if (k === "class") e.className = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else if (v === true) e.setAttribute(k, "");
+    else e.setAttribute(k, v);
+  }
+  for (const x of c.flat()) if (x != null && x !== false) e.append(x.nodeType ? x : document.createTextNode(String(x)));
+  return e;
+}
+function kirlet() { kirli = true; durumEl.textContent = "Kaydedilmemiş değişiklik"; durumEl.style.color = "#FFE7D6"; }
+function bilgi(m, hata) { durumEl.textContent = m; durumEl.style.color = hata ? "#FFB4A8" : "#B9C6D6"; }
+const sadeYazi = (s) => String(s || "").replace(/<[^>]+>/g, "").slice(0, 60);
+
+function alan(etiket, o, k, tip = "text", ipucu = "") {
+  const id = "f" + (++sayac.n);
+  let g;
+  if (tip === "area") { g = el("textarea", { id, rows: 3, oninput: (e) => { o[k] = e.target.value; kirlet(); } }); g.value = o[k] ?? ""; }
+  else if (tip === "num") { g = el("input", { id, type: "number", step: "any", oninput: (e) => { o[k] = Number(e.target.value); kirlet(); } }); g.value = o[k] ?? ""; }
+  else if (tip === "ro") { g = el("input", { id, readonly: true }); g.value = o[k] ?? ""; }
+  else { g = el("input", { id, type: "text", oninput: (e) => { o[k] = e.target.value; kirlet(); } }); g.value = o[k] ?? ""; }
+  return el("div", { class: "alan" }, el("label", { for: id }, etiket), g, ipucu ? el("small", {}, ipucu) : null);
+}
+function ikonlar(dizi, i, yenile) {
+  return el("span", { class: "ik" },
+    el("button", { class: "btn-ik", type: "button", "aria-label": "Yukarı taşı", disabled: i === 0, onclick: () => { [dizi[i - 1], dizi[i]] = [dizi[i], dizi[i - 1]]; kirlet(); yenile(); } }, "↑"),
+    el("button", { class: "btn-ik", type: "button", "aria-label": "Aşağı taşı", disabled: i === dizi.length - 1, onclick: () => { [dizi[i + 1], dizi[i]] = [dizi[i], dizi[i + 1]]; kirlet(); yenile(); } }, "↓"),
+    el("button", { class: "btn-ik", type: "button", "aria-label": "Sil", onclick: () => { if (confirm("Bu öğe silinsin mi?")) { dizi.splice(i, 1); kirlet(); yenile(); } } }, "Sil"));
+}
+// Düz metin dizisi (ör. hizmetler, talep konuları, paragraflar)
+function metinListe(etiket, dizi, area = false) {
+  const kap = el("div", { class: "liste" });
+  const yenile = () => {
+    kap.replaceChildren(...dizi.map((v, i) => {
+      const g = area ? el("textarea", { rows: 2, "aria-label": etiket + " " + (i + 1), oninput: (e) => { dizi[i] = e.target.value; kirlet(); } }) : el("input", { type: "text", "aria-label": etiket + " " + (i + 1), oninput: (e) => { dizi[i] = e.target.value; kirlet(); } });
+      g.value = v;
+      return el("div", { class: "satir" }, g, ikonlar(dizi, i, yenile));
+    }), el("button", { class: "btn-ik", type: "button", onclick: () => { dizi.push(""); kirlet(); yenile(); } }, "+ Ekle"));
+  };
+  yenile();
+  return el("div", { class: "alan" }, el("span", { class: "etiket" }, etiket), kap);
+}
+// Nesne dizisi; sema: [{k, l, t}] t: text|area|foto|num|ro
+function nesneListe(etiket, dizi, sema, yeni, ekle = true) {
+  const kap = el("div", { class: "liste" });
+  const yenile = () => {
+    kap.replaceChildren(...dizi.map((o, i) => el("fieldset", { class: "kart-satir" },
+      el("legend", {}, sadeYazi(o[sema[0].k]) || etiket + " " + (i + 1)),
+      ...sema.map((s) => s.t === "foto" ? fotoAlan(s.l, o, s.k, s.onSec) : alan(s.l, o, s.k, s.t, s.ipucu)),
+      ikonlar(dizi, i, yenile))),
+      ekle ? el("button", { class: "btn-ik", type: "button", onclick: () => { dizi.push(yeni()); kirlet(); yenile(); } }, "+ " + etiket + " ekle") : null);
+  };
+  yenile();
+  return el("div", { class: "blok" }, el("h3", {}, etiket + " (" + dizi.length + ")"), kap);
+}
+// Soru-cevap çiftleri: [soru, cevap]
+function soruBlok(etiket, dizi) {
+  const nesne = dizi.map((p) => ({ q: p[0], a: p[1] }));
+  const kutu = nesneListe(etiket, nesne, [{ k: "q", l: "Soru", t: "text" }, { k: "a", l: "Cevap", t: "area" }], () => ({ q: "", a: "" }));
+  // nesne dizisini orijinal dizi formatına (çift) geri yaz
+  const ayna = () => { dizi.splice(0, dizi.length, ...nesne.map((o) => [o.q, o.a])); };
+  kutu.addEventListener("input", () => { ayna(); kirlet(); }, true);
+  kutu.addEventListener("click", () => setTimeout(ayna, 0), true);
+  ayna();
+  return kutu;
+}
+function fotoAlan(etiket, o, k, onSec) {
+  const kap = el("div", { class: "foto-sec" });
+  const yenile = () => kap.replaceChildren(
+    el("img", { src: "/onizleme/img/" + (o[k] || "x") + "-800.webp", alt: "", width: 96, height: 72, loading: "lazy", onerror: (e) => { e.target.removeAttribute("src"); } }),
+    el("code", {}, o[k] || "seçilmedi"),
+    el("button", { class: "btn-ik", type: "button", onclick: () => fotoSec((ad) => { o[k] = ad; if (onSec) onSec(o); kirlet(); yenile(); }) }, "Foto seç"));
+  yenile();
+  return el("div", { class: "alan" }, el("span", { class: "etiket" }, etiket), kap);
+}
+function fotoSec(cb) {
+  const izgara = el("div", { class: "izgara" }, FOTO.web.map((ad) => el("button", { type: "button", onclick: () => { cb(ad); kapat(); } },
+    el("img", { src: "/onizleme/img/" + ad + "-800.webp", alt: "", loading: "lazy" }), ad)));
+  const kapat = () => kutu.remove();
+  const kutu = el("div", { class: "kaplama", onclick: (e) => { if (e.target === kutu) kapat(); } },
+    el("div", { role: "dialog", "aria-label": "Fotoğraf seç" },
+      el("div", { class: "satir-ust" }, el("strong", {}, "Fotoğraf seç"), el("button", { class: "dugme", type: "button", onclick: kapat }, "Kapat")),
+      FOTO.web.length ? izgara : el("p", {}, "Henüz fotoğraf yok. Fotoğraflar sekmesinden yükleyin.")));
+  document.body.append(kutu);
+  kutu.querySelector("button").focus();
+}
+const baslik = (t) => el("h2", {}, t);
+
+const SEKMELER = [
+  ["firma", "Firma", () => [baslik("Firma bilgileri"),
+    el("div", { class: "blok" }, ["ad", "slogan", "tel", "telGor", "waMesaj", "site", "mapsCid", "yorumYaz", "placeId", "adres", "adresKisa", "sokak", "postaKodu", "ilce", "il"].map((k) => alan(k, D.firma, k)),
+      alan("enlem", D.firma, "enlem", "num"), alan("boylam", D.firma, "boylam", "num"),
+      alan("tanıtım (schema açıklaması)", D.firma, "tanitim", "area"),
+      alan("IndexNow anahtarı", D.firma, "indexnow", "ro", "Değiştirilmez; yalnız görüntüleme.")),
+    el("div", { class: "blok" }, el("h3", {}, "Semtler (schema alanları)"), metinListe("Semt", D.firma.alanlar))]],
+  ["slider", "Slider", () => [baslik("Ana sayfa slider"), nesneListe("Slayt", D.slider, [
+    { k: "baslik", l: "Başlık (HTML: <br>, <em> kullanılabilir)", t: "text" }, { k: "metin", l: "Metin", t: "area" },
+    { k: "foto", l: "Fotoğraf", t: "foto" }, { k: "alt", l: "Görsel açıklaması", t: "text" }], () => ({ baslik: "", metin: "", foto: "", alt: "" }))]],
+  ["yontem", "Yöntemler / Hizmetler", () => [baslik("Yöntemler ve hizmetler"),
+    el("div", { class: "blok" }, el("h3", {}, "Yöntemler bölümü"), alan("Başlık", D.yontem, "baslik"), alan("Giriş", D.yontem, "giris", "area")),
+    nesneListe("Yöntem", D.yontem.maddeler, [{ k: "baslik", l: "Ad", t: "text" }, { k: "metin", l: "Açıklama", t: "area" }, { k: "foto", l: "Fotoğraf", t: "foto" }, { k: "alt", l: "Görsel açıklaması", t: "text" }], () => ({ baslik: "", metin: "", foto: "", alt: "" })),
+    el("div", { class: "blok" }, el("h3", {}, "Hizmet listesi (schema)"), metinListe("Hizmet", D.firma.hizmetler)),
+    el("div", { class: "blok" }, el("h3", {}, "Süreç"), alan("Başlık", D.surec, "baslik"), alan("Giriş", D.surec, "giris", "area")),
+    nesneListe("Adım", D.surec.adimlar, [{ k: "baslik", l: "Başlık", t: "text" }, { k: "metin", l: "Metin", t: "area" }], () => ({ baslik: "", metin: "" })),
+    el("div", { class: "blok" }, el("h3", {}, "Kimlere"), alan("Başlık", D.kimlere, "baslik"), alan("Giriş", D.kimlere, "giris", "area")),
+    nesneListe("Kime", D.kimlere.maddeler, [{ k: "baslik", l: "Başlık", t: "text" }, { k: "metin", l: "Metin", t: "area" }], () => ({ baslik: "", metin: "" })),
+    el("div", { class: "blok" }, el("h3", {}, "Galeri"), alan("Başlık", D.galeri, "baslik"), alan("Giriş", D.galeri, "giris", "area")),
+    nesneListe("Galeri fotoğrafı", D.galeri.fotolar, [{ k: "etiket", l: "Etiket", t: "text" }, { k: "foto", l: "Fotoğraf", t: "foto" }, { k: "alt", l: "Görsel açıklaması", t: "text" }], null, false)]],
+  ["belirti", "Belirtiler", () => [baslik("Belirtiler"), el("div", { class: "blok" }, alan("Başlık", D.belirtiler, "baslik"), alan("Giriş", D.belirtiler, "giris", "area")),
+    nesneListe("Belirti", D.belirtiler.maddeler, [{ k: "baslik", l: "Başlık", t: "text" }, { k: "metin", l: "Metin", t: "area" }], () => ({ baslik: "", metin: "" }))]],
+  ["bolge", "Bölgeler", () => [baslik("Bölgeler ve bölge sayfaları"),
+    nesneListe("Bölge", D.bolgeler, [{ k: "ad", l: "Ad", t: "text" }, { k: "sayfa", l: "Sayfa dosyası (boş = sayfa yok)", t: "text" }], () => ({ ad: "", sayfa: "" })),
+    ...D.sayfalar.filter((s) => s.tip === "bolge").map((s) => nesneBolge(s))]],
+  ["sss", "SSS", () => [baslik("Sık sorulan sorular (tüm sayfalar)"), el("div", { class: "blok" }, soruBlok("Soru", D.sssOrtak))]],
+  ["rehber", "Rehber", () => [baslik("Su kaçağı rehberi"),
+    el("div", { class: "uyari" }, "SVG çizimli bir kartın fotoğrafını değiştirirseniz çizim kaldırılır ve fotoğraf gösterilir."),
+    nesneListe("Yazı", D.rehber, [{ k: "baslik", l: "Başlık (soru olarak da kullanılır)", t: "text" }, { k: "slug", l: "Bağlantı kimliği (slug)", t: "text" }, { k: "ozet", l: "Özet", t: "area" },
+      { k: "foto", l: "Fotoğraf", t: "foto", onSec: (o) => { delete o.svg; } }, { k: "alt", l: "Görsel açıklaması", t: "text" }],
+      () => ({ slug: "", baslik: "", ozet: "", foto: "", alt: "", paragraflar: [""] })),
+  ]],
+  ["talep", "Talep konuları", () => [baslik("Talep formu sorun tipleri"), el("div", { class: "blok" }, metinListe("Konu", D.talepKonulari))]],
+  ["foto", "Fotoğraflar", () => [baslik("Fotoğraflar"), fotoYukle(), el("div", { class: "blok" }, el("h3", {}, "Web fotoğrafları (" + FOTO.web.length + ")"),
+    el("div", { class: "izgara" }, FOTO.web.map((ad) => el("figure", {}, el("img", { src: "/onizleme/img/" + ad + "-800.webp", alt: "", loading: "lazy" }), ad)))),
+    el("div", { class: "blok" }, el("h3", {}, "Ham fotoğraflar (" + FOTO.ham.length + ")"),
+      el("div", { class: "izgara" }, FOTO.ham.map((f) => el("figure", {}, el("img", { src: "/ham/" + encodeURIComponent(f), alt: "", loading: "lazy" }), f))))]],
+  ["google", "Google", () => [baslik("Google İşletme verisi"), el("div", { class: "blok" },
+    el("p", {}, "Ad: " + (G.ad || "-") + " · Puan: " + (G.puan ?? "-") + " · Yorum sayısı: " + (G.yorum ?? "-")),
+    el("p", {}, "Yorum metni sayısı: " + ((G.yorumlar || []).length) + " · Çekilme: " + (G.cekildi || "-")),
+    el("p", { style: "margin-top:10px" }, "Google verisi her derlemede tazelenir. Yeniden çekmek için derleyin."),
+    el("button", { class: "dugme", type: "button", style: "margin-top:10px", onclick: () => derle(true) }, "Google'dan yenile (derle)"))]],
+  ["yayin", "Yayınla", () => [baslik("Derle, önizle, yayınla"), el("div", { class: "blok" },
+    el("p", {}, "Derle: değişiklikler varsa önce kaydedilir, sonra site yeniden üretilir."),
+    el("div", { class: "satir-ust", style: "margin-top:10px" },
+      el("button", { class: "dugme", type: "button", onclick: () => derle(false) }, "Derle"),
+      el("select", { "aria-label": "Önizleme sayfası", style: "width:auto", onchange: (e) => { $("#onizleme").src = "/onizleme/" + e.target.value + "?v=" + Date.now(); } },
+        ["index.html", "su-kacagi-rehberi.html", "bahcelievler-su-kacagi-tespiti.html", "sirinevler-su-kacagi-tespiti.html", "esenler-su-kacagi-tespiti.html"].map((p) => el("option", { value: p }, p)))),
+    el("iframe", { id: "onizleme", class: "onizleme", title: "Site önizlemesi", src: "/onizleme/index.html" }),
+    el("div", { class: "satir-ust", style: "margin-top:12px" }, el("button", { class: "dugme ana", type: "button", onclick: yayinla }, "Yayınla (commit)")),
+    el("pre", { id: "cikti", "aria-live": "polite" }, ""))]],
+];
+
+function nesneBolge(s) {
+  return el("div", { class: "blok" }, el("h3", {}, "Bölge sayfası: " + s.bolge + " (" + s.dosya + ")"),
+    alan("Başlık (title)", s, "baslik"), alan("Açıklama (meta)", s, "aciklama", "area"), alan("H1", s, "h1"),
+    alan("Hero başlığı (HTML: <br>, <em>)", s, "heroBaslik"), alan("Giriş", s, "giris", "area"),
+    alan("Hero görsel açıklaması", s, "heroAlt"),
+    el("div", { class: "alan" }, el("span", { class: "etiket" }, "Hero fotoğrafı"), fotoAlan("Fotoğraf", s, "heroFoto")),
+    metinListe("Paragraf", s.paragraflar, true), metinListe("Mahalle", s.mahalleler),
+    el("div", { class: "alan" }, el("span", { class: "etiket" }, "Bölgeye özel SSS"), soruBlok("Soru", s.sssEk)));
+}
+
+function fotoYukle() {
+  const dosyaEl = el("input", { type: "file", accept: "image/jpeg,image/png,image/webp", id: "fdosya" });
+  const adEl = el("input", { type: "text", id: "fad", placeholder: "ör. yeni-foto" });
+  dosyaEl.addEventListener("change", () => { if (dosyaEl.files[0] && !adEl.value) adEl.value = dosyaEl.files[0].name.replace(/\.[^.]+$/, ""); });
+  const sonuc = el("p", { role: "status" });
+  return el("div", { class: "blok" }, el("h3", {}, "Fotoğraf yükle"),
+    el("div", { class: "alan" }, el("label", { for: "fdosya" }, "Dosya (JPG, PNG, WEBP)"), dosyaEl),
+    el("div", { class: "alan" }, el("label", { for: "fad" }, "Ad (harf, rakam, tire)"), adEl),
+    el("button", { class: "dugme ana", type: "button", onclick: () => {
+      const f = dosyaEl.files[0];
+      if (!f) { sonuc.textContent = "Dosya seçin."; return; }
+      const oku = new FileReader();
+      oku.onload = async () => {
+        sonuc.textContent = "Yükleniyor ve işleniyor…";
+        const r = await fetch("/api/foto", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ad: adEl.value || f.name, dataUrl: oku.result }) });
+        const j = await r.json();
+        sonuc.textContent = j.mesaj || (j.ok ? "Tamam" : "Hata");
+        sonuc.className = j.ok ? "" : "hata";
+        if (j.ok) { FOTO = await (await fetch("/api/fotolar")).json(); render(); }
+      };
+      oku.readAsDataURL(f);
+    } }, "Yükle ve işle"), sonuc);
+}
+
+function menuCiz() {
+  $("#menu").replaceChildren(...SEKMELER.map(([id, ad]) => el("button", { type: "button", role: "tab", "aria-selected": id === aktif, onclick: () => { aktif = id; render(); } }, ad)));
+}
+function render() {
+  if (!D) return;
+  menuCiz();
+  const s = SEKMELER.find((x) => x[0] === aktif);
+  $("#icerik").replaceChildren(...s[2]());
+  const onizle = $("#onizleme"); if (onizle && !onizle.src) onizle.src = "/onizleme/index.html";
+}
+
+async function yukle() {
+  D = await (await fetch("/api/icerik")).json();
+  FOTO = await (await fetch("/api/fotolar")).json();
+  G = await (await fetch("/api/google")).json();
+  kirli = false; bilgi("Hazır");
+  render();
+}
+async function kaydet() {
+  bilgi("Kaydediliyor…");
+  const r = await fetch("/api/icerik", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(D) });
+  const j = await r.json();
+  if (!j.ok) { bilgi("Kaydedilmedi: " + (j.hatalar || []).join(", "), true); return false; }
+  kirli = false; bilgi("Kaydedildi" + (j.yedek ? " (yedek: " + j.yedek + ")" : ""));
+  return true;
+}
+async function derle(googleYenile) {
+  if (kirli && !(await kaydet())) return;
+  bilgi("Derleniyor…");
+  const j = await (await fetch("/api/derle", { method: "POST" })).json();
+  $("#cikti") && ($("#cikti").textContent = j.cikti || "");
+  bilgi(j.ok ? "Derlendi" : "Derleme hatası", !j.ok);
+  G = await (await fetch("/api/google")).json();
+  if (googleYenile) { aktif = "google"; }
+  const f = $("#onizleme"); if (f) f.src = "/onizleme/index.html?v=" + Date.now();
+  render();
+}
+async function yayinla() {
+  if (kirli && !(await kaydet())) return;
+  const j = await (await fetch("/api/yayinla", { method: "POST" })).json();
+  $("#cikti").textContent = j.mesaj;
+  bilgi(j.mesaj, !j.ok);
+}
+
+$("#kaydet").addEventListener("click", kaydet);
+$("#geriAl").addEventListener("click", () => { if (!kirli || confirm("Kaydedilmemiş değişiklikler kaybolacak. Devam edilsin mi?")) yukle(); });
+addEventListener("beforeunload", (e) => { if (kirli) { e.preventDefault(); e.returnValue = ""; } });
+addEventListener("keydown", (e) => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") { e.preventDefault(); kaydet(); } });
+yukle().catch((e) => bilgi("Sunucuya ulaşılamadı: " + e.message, true));
+</script>
+</body></html>

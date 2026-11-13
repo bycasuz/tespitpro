@@ -1,0 +1,466 @@
+{
+  "firma": {
+    "ad": "TespitPro",
+    "slogan": "Kaçağı var, biz buluruz!",
+    "site": "https://bycasuz.github.io/tespitpro/",
+    "tel": "+905413730069",
+    "telGor": "0541 373 00 69",
+    "waMesaj": "Merhaba, su kaçağı tespiti için bilgi almak istiyorum.",
+    "mapsCid": "https://maps.google.com/?cid=11539754779874183849",
+    "yorumYaz": "https://search.google.com/local/writereview?placeid=ChIJu-e2S3qlyhQRqUqEAdVxJaA",
+    "placeId": "ChIJu-e2S3qlyhQRqUqEAdVxJaA",
+    "adres": "Şirinevler Mah. Yeşilbağ Sk. No:11 D:A, 34188 Bahçelievler / İstanbul",
+    "adresKisa": "Şirinevler Mah. Yeşilbağ Sk. No:11 D:A",
+    "sokak": "Yeşilbağ Sokak",
+    "postaKodu": "34188",
+    "ilce": "Bahçelievler",
+    "il": "İstanbul",
+    "enlem": 40.9978802,
+    "boylam": 28.8465744,
+    "indexnow": "7f3c9a1e5b2d4c6e8a0b1d3f5e7a9c2b",
+    "tanitim": "Bahçelievler Şirinevler merkezli; termal kamera, akustik dinleme ve kamerayla kırmadan su kaçağı tespiti ve noktasal onarım. 7/24 hizmet.",
+    "hizmetler": [
+      "Kırmadan su kaçağı tespiti",
+      "Termal kamera ile su kaçağı tespiti",
+      "Akustik dinleme ile su kaçağı tespiti",
+      "Kameralı gider ve boru inceleme",
+      "Noktasal su kaçağı onarımı",
+      "Tıkanıklık açma"
+    ],
+    "alanlar": [
+      "Bahçelievler",
+      "Şirinevler",
+      "Esenler",
+      "Yenibosna",
+      "Güngören",
+      "Bakırköy",
+      "Bağcılar"
+    ]
+  },
+  "sayfalar": [
+    {
+      "tip": "ana",
+      "dosya": "index.html",
+      "baslik": "TespitPro | Kırmadan Su Kaçağı Tespiti · Bahçelievler, Şirinevler · 7/24",
+      "aciklama": "Termal kamera ve akustik dinleme ile kırmadan su kaçağı tespiti, noktasal onarım. Bahçelievler, Şirinevler, Esenler · 7/24 · 0541 373 00 69.",
+      "h1": "Kırmadan su kaçağı tespiti",
+      "heroBaslik": "Kaçağı var,<br><em>biz buluruz.</em>",
+      "giris": "Su kaçağını termal kamera ve akustik dinlemeyle kırmadan buluyor, yalnızca o noktayı açıp onarıyoruz. Gece gündüz, haftanın her günü.",
+      "heroFoto": "akustik-banyo",
+      "heroAlt": "TespitPro ekibi banyoda akustik dinleme cihazıyla su kaçağı arıyor",
+      "bolge": null,
+      "paragraflar": [],
+      "mahalleler": [],
+      "sssEk": []
+    },
+    {
+      "tip": "bolge",
+      "dosya": "bahcelievler-su-kacagi-tespiti.html",
+      "baslik": "Bahçelievler Su Kaçağı Tespiti | Kırmadan, 7/24 · TespitPro",
+      "aciklama": "Bahçelievler'de termal kamera ve akustik cihazla kırmadan su kaçağı tespiti, noktasal onarım. 7/24 · 0541 373 00 69.",
+      "h1": "Bahçelievler su kaçağı tespiti",
+      "heroBaslik": "Bahçelievler'de<br><em>su kaçağı tespiti.</em>",
+      "giris": "Bahçelievler'in tüm mahallelerinde kaçağı termal kamera ve akustik dinlemeyle kırmadan buluyoruz. Merkezimiz Şirinevler'de; gece ve hafta sonu da geliyoruz.",
+      "heroFoto": "termal-balkon",
+      "heroAlt": "Bahçelievler'de bir apartmanda termal kamerayla tesisat taraması",
+      "bolge": "Bahçelievler",
+      "paragraflar": [
+        "Bahçelievler'deki apartmanların önemli bir kısmında tesisat yıllar içinde yenilenmediği için gizli kaçaklar sık görülüyor. En sık karşılaştığımız durumlar: banyodan alt kata su sızması, mutfak tezgâhı altındaki bağlantılardan sızıntı, kombi hattındaki kaçaklar ve bina girişindeki ana hat kaçakları.",
+        "Kaçağın yerini termal kamera, akustik dinleme ve gerekirse kamerayla kesinleştirdiğimiz için bütün banyoyu veya mutfağı kırmak gerekmiyor; yalnızca kaçağın olduğu nokta açılıp onarılıyor."
+      ],
+      "mahalleler": [
+        "Şirinevler",
+        "Bahçelievler Merkez",
+        "Siyavuşpaşa",
+        "Kocasinan",
+        "Yenibosna",
+        "Soğanlı",
+        "Zafer",
+        "Cumhuriyet",
+        "Hürriyet",
+        "Fevzi Çakmak",
+        "Çobançeşme"
+      ],
+      "sssEk": [
+        [
+          "Bahçelievler'e ne kadar sürede geliyorsunuz?",
+          "Merkezimiz Şirinevler'de olduğu için Bahçelievler içindeki adreslere genellikle kısa sürede ulaşıyoruz; trafik durumuna göre telefonda net süre veriyoruz."
+        ]
+      ]
+    },
+    {
+      "tip": "bolge",
+      "dosya": "sirinevler-su-kacagi-tespiti.html",
+      "baslik": "Şirinevler Su Kaçağı Tespiti | Mahallenizdeyiz · TespitPro",
+      "aciklama": "Şirinevler'de kırmadan su kaçağı tespiti ve noktasal onarım. Merkezimiz Yeşilbağ Sokak'ta; 7/24 · 0541 373 00 69.",
+      "h1": "Şirinevler su kaçağı tespiti",
+      "heroBaslik": "Şirinevler'de<br><em>mahallenizdeyiz.</em>",
+      "giris": "Merkezimiz Şirinevler Yeşilbağ Sokak'ta. Mahalle içindeki adreslere çoğu zaman dakikalar içinde ulaşıyor, kaçağı cihaz ve kamerayla kırmadan buluyoruz.",
+      "heroFoto": "termal-duvar",
+      "heroAlt": "Şirinevler'de bir dairede duvar dibinde termal kamerayla ölçüm",
+      "bolge": "Şirinevler",
+      "paragraflar": [
+        "Şirinevler'deki eski ve yoğun yapılaşmış binalarda alt kata su sızması ve kolon hattı kaçakları sık görülüyor. Komşunuzdan \"tavanımıza su geliyor\" uyarısı aldıysanız kaynağı bulmadan fayans kırdırmayın.",
+        "Önce termal kamerayla ısı izini, akustik cihazla kaçağın sesini takip ediyor; kaçağın tam noktasını işaretleyip size gösteriyoruz. Onarım için yalnız o nokta açılıyor."
+      ],
+      "mahalleler": [
+        "Kazım Karabekir Caddesi",
+        "Mahmutbey Caddesi",
+        "Yeşilbağ Sokak çevresi",
+        "Yenibosna sınırı",
+        "Bahçelievler sınırı"
+      ],
+      "sssEk": [
+        [
+          "Şirinevler'de acil durumda gelir misiniz?",
+          "Evet. Merkezimiz Şirinevler'de olduğu için gece de dahil hızlıca geliyoruz; alt kata su iniyorsa önce ana vanayı kapatıp bizi arayın."
+        ]
+      ]
+    },
+    {
+      "tip": "bolge",
+      "dosya": "esenler-su-kacagi-tespiti.html",
+      "baslik": "Esenler Su Kaçağı Tespiti | Kırmadan, 7/24 · TespitPro",
+      "aciklama": "Esenler'de termal kamera ve akustik cihazla kırmadan su kaçağı tespiti, alt kata su sızması ve noktasal onarım. 7/24 · 0541 373 00 69.",
+      "h1": "Esenler su kaçağı tespiti",
+      "heroBaslik": "Esenler'de<br><em>su kaçağı tespiti.</em>",
+      "giris": "Esenler'de alt kata su sızması, yüksek su faturası ve duvardaki nem için kaçağı cihazla kırmadan buluyor, aynı ekiple onarıyoruz.",
+      "heroFoto": "termal-balkon",
+      "heroAlt": "Termal kamerayla bina tesisatında kaçak taraması",
+      "bolge": "Esenler",
+      "paragraflar": [
+        "Esenler'de en sık karşılaştığımız durumlardan biri alt kata su inmesi. Kaçağın yerini bilmeden fayans veya duvar kırmak hem masraflı hem de çoğu zaman yanlış noktayı açmak demek.",
+        "Biz önce cihazla dinleyip termal kamerayla bakıyor, yalnızca kaçağın olduğu noktayı açıyoruz. Tespit ve onarım aynı ekip tarafından yapılır."
+      ],
+      "mahalleler": [
+        "Esenler'in tüm mahalleleri",
+        "Güngören sınırı",
+        "Bağcılar sınırı"
+      ],
+      "sssEk": [
+        [
+          "Esenler'e de geliyor musunuz?",
+          "Evet, Esenler'in tüm mahallelerine geliyoruz. Merkezimiz Şirinevler'de, Esenler'e yakın mesafede."
+        ]
+      ]
+    }
+  ],
+  "slider": [
+    {
+      "foto": "akustik-banyo",
+      "baslik": "Kaçağı var,<br><em>biz buluruz.</em>",
+      "metin": "Su kaçağını termal kamera ve akustik dinlemeyle kırmadan buluyor, yalnızca o noktayı açıp onarıyoruz. Gece gündüz, haftanın her günü.",
+      "alt": "TespitPro ekibi banyoda akustik dinleme cihazıyla su kaçağı arıyor",
+      "sekme": "AKUSTİK",
+      "etiket": "AKUSTİK DİNLEME"
+    },
+    {
+      "foto": "termal-balkon",
+      "baslik": "Önce <em>buluyoruz,</em><br>sonra açıyoruz.",
+      "metin": "Termal kamerayla duvar ve zemindeki ısı izini takip ediyoruz. Kaçağın noktası kesinleşmeden hiçbir yeri kırmıyoruz.",
+      "alt": "Ekip üyesi balkonda termal kamerayla tesisatı tarıyor",
+      "sekme": "TERMAL",
+      "etiket": "TERMAL TARAMA"
+    },
+    {
+      "foto": "termal-duvar",
+      "baslik": "Kırmadan<br><em>tespit.</em>",
+      "metin": "Duvar ve zeminde kaçağın izini cihazla sürüyoruz; gerekirse gider ve borulara kamerayla bakıyoruz.",
+      "alt": "Duvar dibinde termal kamerayla ölçüm",
+      "sekme": "KAMERA",
+      "etiket": "TERMAL KAMERA"
+    },
+    {
+      "foto": "noktasal-acma",
+      "baslik": "Yalnızca<br><em>o nokta açılır.</em>",
+      "metin": "Kaçağın yeri kesinleşince bütün banyo ya da mutfağı değil, yalnızca o noktayı açıp onarıyoruz.",
+      "alt": "Zeminde yalnızca kaçak noktası açılmış",
+      "sekme": "ONARIM",
+      "etiket": "NOKTASAL ONARIM"
+    }
+  ],
+  "belirtiler": {
+    "baslik": "Bu belirtilerden biri varsa kaçak büyümeden arayın.",
+    "giris": "Gizli kaçak her gün hem faturanıza hem binanıza zarar verir. Erken tespit, küçük bir noktasal onarım demektir.",
+    "maddeler": [
+      {
+        "baslik": "Su faturası sebepsiz yükseldi",
+        "metin": "Bütün musluklar kapalıyken sayaç dönüyorsa hatta gizli kaçak vardır.",
+        "teshis": "Akustik dinleme"
+      },
+      {
+        "baslik": "Alt kata su iniyor",
+        "metin": "Komşunun tavanında leke veya damlama; kaynak çoğu zaman banyo, mutfak ya da kombi hattıdır.",
+        "teshis": "Termal kamera"
+      },
+      {
+        "baslik": "Duvarda nem, kabarma, küf",
+        "metin": "Boya kabarması, sürekli ıslak süpürgelik veya küf kokusu tesisattan sızıntıya işaret eder.",
+        "teshis": "Termal kamera"
+      },
+      {
+        "baslik": "Su basıncı düştü",
+        "metin": "Basıncın aniden zayıflaması ya da kombinin sık su istemesi kaçak belirtisi olabilir.",
+        "teshis": "Kameralı inceleme"
+      }
+    ]
+  },
+  "yontem": {
+    "baslik": "Kaçağı nasıl<br>kırmadan buluyoruz?",
+    "giris": "Tahminle fayans kırmıyoruz. Birden çok yöntemi birlikte kullanıp kaçağın yerini kesinleştiriyor, sonra açıyoruz.",
+    "maddeler": [
+      {
+        "foto": "termal-duvar",
+        "baslik": "Termal kamera",
+        "metin": "Duvar ve zemindeki sıcaklık farkını görüntüleyip sıcak ya da soğuk su hattındaki sızıntının izini sürüyoruz.",
+        "alt": "Termal kamerayla duvardaki ısı izini takip ediyoruz"
+      },
+      {
+        "foto": "akustik-banyo",
+        "baslik": "Akustik dinleme",
+        "metin": "Hassas dinleme cihazıyla basınçlı borudaki kaçağın sesini zeminin üstünden dinleyip noktasını daraltıyoruz.",
+        "alt": "Kulaklıklı akustik cihazla banyoda kaçak sesi dinleniyor"
+      },
+      {
+        "foto": "termal-ekran",
+        "baslik": "Kameralı inceleme",
+        "metin": "Gerekirse gider ve borulara kamerayla bakıyor, kırığı ve sızıntıyı ekranda size de gösteriyoruz.",
+        "alt": "Termal kamera ekranında kaçak bölgesi görülüyor"
+      },
+      {
+        "foto": "noktasal-acma",
+        "baslik": "Noktasal onarım",
+        "metin": "Kaçağın yeri kesinleşince yalnızca o noktayı açıp onarıyoruz; bütün banyo ya da mutfak kırılmıyor.",
+        "alt": "Zeminde yalnızca kaçak noktası açılmış, boru onarımı"
+      }
+    ]
+  },
+  "surec": {
+    "baslik": "Aradığınız andan<br>onarıma kadar.",
+    "giris": "Her adımı size anlatıyor, kaçağın yerini göstermeden işe başlamıyoruz.",
+    "adimlar": [
+      {
+        "baslik": "Arayın ya da yazın",
+        "metin": "Belirtileri kısaca anlatın; fotoğraf göndermek isterseniz WhatsApp'tan iletin."
+      },
+      {
+        "baslik": "Adresinize gelelim",
+        "metin": "Şirinevler'den çıkıyoruz; gece ve hafta sonu da."
+      },
+      {
+        "baslik": "Kaçağı birlikte görelim",
+        "metin": "Cihaz ve kamerayla yeri buluyor, işaretleyip size gösteriyoruz."
+      },
+      {
+        "baslik": "Noktasal onarım",
+        "metin": "Onayınızla yalnız o noktayı açıp onarıyor, alanı temiz bırakıyoruz."
+      }
+    ]
+  },
+  "galeri": {
+    "baslik": "Sahadan.",
+    "giris": "Fotoğrafların hepsi bizim işlerimizden; Google İşletme profilimizde de yayında.",
+    "fotolar": [
+      {
+        "sinif": "g1",
+        "foto": "termal-balkon",
+        "genis": "(max-width:980px) 100vw, 58vw",
+        "alt": "Ekip üyesi balkonda termal kamerayla tesisatı tarıyor",
+        "etiket": "Termal tarama"
+      },
+      {
+        "sinif": "g2",
+        "foto": "akustik-banyo",
+        "genis": "(max-width:980px) 50vw, 42vw",
+        "alt": "Banyoda akustik dinleme cihazıyla kaçak aranıyor",
+        "etiket": "Akustik dinleme"
+      },
+      {
+        "sinif": "g3",
+        "foto": "noktasal-acma",
+        "genis": "(max-width:980px) 50vw, 42vw",
+        "alt": "Zeminde yalnızca kaçak noktası açılmış",
+        "etiket": "Noktasal açma"
+      },
+      {
+        "sinif": "g4",
+        "foto": "termal-duvar",
+        "genis": "(max-width:980px) 50vw, 34vw",
+        "alt": "Duvar dibinde termal kamerayla ölçüm",
+        "etiket": "Duvar içi hat"
+      },
+      {
+        "sinif": "g5",
+        "foto": "kanal-acma",
+        "genis": "(max-width:980px) 50vw, 25vw",
+        "alt": "Tuvalet giderinde makineyle tıkanıklık açma",
+        "etiket": "Tıkanıklık açma",
+        "tek": true
+      }
+    ]
+  },
+  "kimlere": {
+    "baslik": "Evden fabrikaya.",
+    "giris": "Daire, dükkân ya da tesis; yöntem aynı: önce bul, sonra noktasal onar.",
+    "maddeler": [
+      {
+        "baslik": "Evler",
+        "metin": "Banyo, mutfak, kombi ve yerden ısıtma hatlarındaki gizli kaçaklar."
+      },
+      {
+        "baslik": "İş yerleri",
+        "metin": "Dükkân ve ofislerde işinizi aksatmadan, mesai dışında da tespit."
+      },
+      {
+        "baslik": "Siteler ve apartmanlar",
+        "metin": "Bina girişi, ana hat, kolon ve ortak alan kaçakları; yönetime yerinde anlatım."
+      },
+      {
+        "baslik": "Fabrikalar",
+        "metin": "Geniş alanlarda termal ve akustik yöntemlerle hat taraması."
+      }
+    ]
+  },
+  "bolgeler": [
+    {
+      "ad": "Bahçelievler",
+      "sayfa": "bahcelievler-su-kacagi-tespiti.html"
+    },
+    {
+      "ad": "Şirinevler",
+      "sayfa": "sirinevler-su-kacagi-tespiti.html"
+    },
+    {
+      "ad": "Esenler",
+      "sayfa": "esenler-su-kacagi-tespiti.html"
+    },
+    {
+      "ad": "Yenibosna",
+      "sayfa": ""
+    },
+    {
+      "ad": "Güngören",
+      "sayfa": ""
+    },
+    {
+      "ad": "Bakırköy",
+      "sayfa": ""
+    }
+  ],
+  "sssOrtak": [
+    [
+      "Su kaçağı olduğunu nasıl anlarım?",
+      "En sık işaretler: su faturasının sebepsiz yükselmesi, bütün musluklar kapalıyken sayacın dönmesi, alt kata su inmesi, duvarda veya zeminde nem, kabarma ve küf lekesi."
+    ],
+    [
+      "Kırmadan tespit nasıl yapılıyor?",
+      "Termal kamerayla duvar ve zemindeki ısı farkını, akustik dinleme cihazıyla borudaki kaçağın sesini takip ediyoruz; gerekirse gider ve borulara kamerayla bakıyoruz. Kaçağın noktası kesinleşmeden hiçbir yeri kırmıyoruz."
+    ],
+    [
+      "Onarım için ne kadar yer açılıyor?",
+      "Yalnızca kaçağın olduğu nokta açılıyor. Bütün banyoyu veya mutfağı kırmak gerekmiyor; onarımdan sonra alanı temiz bırakıyoruz."
+    ],
+    [
+      "Gece ya da hafta sonu geliyor musunuz?",
+      "Evet, haftanın 7 günü 24 saat çalışıyoruz. Alt kata su iniyorsa önce ana vanayı kapatın, sonra bizi arayın."
+    ],
+    [
+      "Tespitten sonra tamiri de siz mi yapıyorsunuz?",
+      "Evet. Kaçağın yerini size gösteriyoruz; onayınızla aynı ekip onarımı yapıyor."
+    ]
+  ],
+  "talepKonulari": [
+    "Kaçak tespiti",
+    "Alt kata su iniyor",
+    "Su faturası yüksek",
+    "Duvarda nem veya küf",
+    "Su basıncı düştü",
+    "Tıkanıklık açma",
+    "Diğer"
+  ],
+  "rehber": [
+    {
+      "slug": "sayac-testi",
+      "baslik": "Sayaç testiyle kaçak nasıl anlaşılır?",
+      "ozet": "Bütün musluklar ve cihazlar kapalıyken sayacın dönüp dönmediğine bakmak, gizli kaçağın en basit ön kontrolüdür.",
+      "svg": "<svg viewBox=\"0 0 240 150\" aria-hidden=\"true\"><rect x=\"10\" y=\"10\" width=\"220\" height=\"130\" rx=\"18\" fill=\"#13315C\"/><circle cx=\"120\" cy=\"80\" r=\"46\" fill=\"none\" stroke=\"#F26B1D\" stroke-width=\"6\"/><path d=\"M120 80 L150 60\" stroke=\"#fff\" stroke-width=\"5\" stroke-linecap=\"round\"/><circle cx=\"120\" cy=\"80\" r=\"5\" fill=\"#fff\"/></svg>",
+      "alt": "Sayaç ve kadran çizimi",
+      "paragraflar": [
+        "Evde su kullanan hiçbir musluk, duş, kombi ya da makine açık değilken su sayacının küçük göstergesi (kadranı) dönüyorsa, tesisatta bir yerde su kaçıyor olabilir.",
+        "Testi yapmak için bütün musluklar kapalı olmalı ve birkaç dakika kimse su kullanmamalı. Sayaç bu sürede dönmeye devam ediyorsa kaçak olasılığı yüksektir. Sayaç durduysa ilk test temiz; yine de belirtiler sürüyorsa uzman kontrolü gerekir.",
+        "Bu test kaçağın yerini göstermez; yalnızca var olduğuna dair bir işarettir. Yeri bulmak için termal kamera, akustik dinleme ve gerekirse kameralı inceleme kullanılır."
+      ]
+    },
+    {
+      "slug": "alt-kat-su-iniyorsa",
+      "baslik": "Alt kata su iniyorsa ilk yapılacaklar",
+      "ozet": "Önce ana vanayı kapatın, sonra kaynağı ve belirtileri bir uzmanla birlikte bulun.",
+      "svg": "<svg viewBox=\"0 0 240 150\" aria-hidden=\"true\"><path d=\"M30 60h180v30H30z\" fill=\"#13315C\"/><rect x=\"100\" y=\"20\" width=\"40\" height=\"40\" rx=\"8\" fill=\"#F26B1D\"/><circle cx=\"120\" cy=\"40\" r=\"9\" fill=\"#fff\"/><path d=\"M120 90v40\" stroke=\"#1D4473\" stroke-width=\"12\"/><path d=\"M60 130h120\" stroke=\"#E4DED5\" stroke-width=\"8\" stroke-linecap=\"round\"/></svg>",
+      "alt": "Ana vana ve boru çizimi",
+      "paragraflar": [
+        "Alt katta tavandan su damlıyorsa ya da leke büyüyorsa önce suyun geldiği yerden ana vanayı kapatmak, sızıntının sürmesini durdurur.",
+        "Ardından elektrikli cihazları ve prizleri ıslak alanlardan uzak tutun. Komşunuzla konuşup kendi dairenizde hangi musluk, banyo ya da kombi hattının çevresinde ıslaklık olduğuna birlikte bakabilirsiniz.",
+        "Kaynağı kestirmeye çalışıp duvar ya da fayans kırmak yerine, sızıntının yerini cihazla tespit ettirmek daha az hasar verir. Bizi aradığınızda belirtileri ve hangi katta ne görüldüğünü anlatmanız yeterli."
+      ]
+    },
+    {
+      "slug": "termal-kamera",
+      "baslik": "Termal kamera neyi görür?",
+      "ozet": "Termal kamera yüzeylerin sıcaklık farkını gösterir; sıcak ya da soğuk su hattının izi duvar ve zeminde ayırt edilebilir.",
+      "foto": "termal-ekran",
+      "alt": "Termal kamera ekranında kaçak bölgesi görülüyor",
+      "paragraflar": [
+        "Termal kamera, duvar ve zemin yüzeyinin sıcaklık dağılımını görüntüler. Su borusunun üzerindeki yüzey çevresinden farklı ısınır ya da soğur; bu fark ekranda renk olarak görünür.",
+        "Ancak termal görüntü her zaman kesin cevap vermez. Güneş ışığı, ısıtma sistemleri ve yapı malzemesi görüntüyü etkileyebilir. Bu yüzden termal taramayı tek başına değil, diğer yöntemlerle birlikte değerlendiriyoruz.",
+        "Ekranı müşteriyle birlikte izleyip görüntünün ne anlama geldiğini yerinde açıklıyoruz."
+      ]
+    },
+    {
+      "slug": "akustik-dinleme",
+      "baslik": "Akustik dinleme nasıl çalışır?",
+      "ozet": "Basınçlı bir borudaki kaçak, hassas dinleme cihazıyla zeminin üstünden takip edilebilen bir ses üretir.",
+      "foto": "akustik-banyo",
+      "alt": "Banyoda akustik dinleme cihazıyla kaçak aranıyor",
+      "paragraflar": [
+        "Basınç altındaki suyun küçük bir delikten sızarken çıkardığı ses boru boyunca yayılır. Akustik dinleme cihazı bu sesi yakalar ve kaçağın en güçlü olduğu bölgeye doğru daraltmamızı sağlar.",
+        "Ortam gürültüsü, komşu daire ve diğer tesisat sesleri dinlemeyi zorlaştırabilir. Bu nedenle sessiz bir zamanı seçmek ve ölçümü birkaç noktada tekrarlamak önemlidir.",
+        "Akustik dinleme tek başına kaçağın noktasını kesinleştirmez; termal kamera ve gerekirse kameralı inceleme ile birlikte kullanılır."
+      ]
+    },
+    {
+      "slug": "kirmadan-tespit",
+      "baslik": "Kırmadan tespit neden daha az masraf demek?",
+      "ozet": "Kaçağın yeri bilinmeden açılan her duvar, hem işçilik hem de sonradan yapılacak sıva, boya ve fayans masrafı demektir.",
+      "foto": "noktasal-acma",
+      "alt": "Zeminde yalnızca kaçak noktası açılmış",
+      "paragraflar": [
+        "Kaçağın tahminen olduğu yere açılan her delik, hem kırım hem de yeniden sıva, boya ve fayans işi getirir. Yanlış noktaya açılırsa masraf iki kez ödenir.",
+        "Önce bulup sonra açmak, yalnızca kaçağın olduğu noktanın açılmasını sağlar. Kalan alan olduğu gibi kalır ve onarımdan sonra temizlenir.",
+        "Bu yaklaşım her arızada geçerli değildir; kaçağın yeri çok geniş bir alandaysa ya da boru hasarlıysa daha büyük bir müdahale gerekebilir. Bunu tespitten sonra açıkça anlatıyoruz."
+      ]
+    },
+    {
+      "slug": "gecikmenin-zarari",
+      "baslik": "Kaçağı geciktirmenin binaya zararları",
+      "ozet": "Sızan su zamanla duvarı, zemini ve komşu daireyi etkiler; erken müdahale hem onarımı hem masrafı küçültür.",
+      "svg": "<svg viewBox=\"0 0 240 150\" aria-hidden=\"true\"><rect x=\"30\" y=\"20\" width=\"180\" height=\"110\" rx=\"10\" fill=\"#E4DED5\"/><path d=\"M120 40c-12 18-18 28-18 38a18 18 0 0 0 36 0c0-10-6-20-18-38z\" fill=\"#1D4473\"/><path d=\"M60 118h120\" stroke=\"#F26B1D\" stroke-width=\"5\" stroke-dasharray=\"8 8\"/></svg>",
+      "alt": "Duvarda sızıntı damlası çizimi",
+      "paragraflar": [
+        "Sızan su duvar içinde nemlenme, boya kabarması, sıva dökülmesi ve küf oluşumuna yol açabilir. Nem kuruyana kadar yapı malzemesinin dayanımı da azalır.",
+        "Alt katta ya da ortak alanda oluşan zarar, komşularla anlaşmazlık ve ortak gider tartışması doğurabilir. Bu nedenle kaynağın erken bulunması hem binanıza hem ilişkilerinize iyi gelir.",
+        "Kaçak kendi kendine kapanmaz; belirti görüldüğünde kontrol ettirmek, geciktirmekten çoğu zaman daha az masraflıdır."
+      ]
+    }
+  ],
+  "rehberSayfa": {
+    "tip": "rehber",
+    "dosya": "su-kacagi-rehberi.html",
+    "baslik": "Su Kaçağı Rehberi | Belirtiler, ilk adımlar, tespit · TespitPro",
+    "aciklama": "Sayaç testi, alt kata su inmesi, termal kamera ve akustik dinleme hakkında kısa rehber. Kırmadan su kaçağı tespiti · 0541 373 00 69.",
+    "h1": "Su kaçağı rehberi",
+    "giris": "Kaçağın belirtileri, ilk yapılacaklar ve tespit yöntemleri hakkında kısa, açık yazılar. Fiyat içermez; bilgi amaçlıdır.",
+    "heroFoto": "termal-ekran",
+    "heroAlt": "Termal kamera ekranında kaçak bölgesi görülüyor",
+    "sssEk": []
+  }
+}

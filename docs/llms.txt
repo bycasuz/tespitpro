@@ -6,3 +6,4 @@
 - [Bahçelievler su kaçağı tespiti](https://bycasuz.github.io/tespitpro/bahcelievler-su-kacagi-tespiti.html)
 - [Şirinevler su kaçağı tespiti](https://bycasuz.github.io/tespitpro/sirinevler-su-kacagi-tespiti.html)
 - [Esenler su kaçağı tespiti](https://bycasuz.github.io/tespitpro/esenler-su-kacagi-tespiti.html)
+- [Su kaçağı rehberi](https://bycasuz.github.io/tespitpro/su-kacagi-rehberi.html)

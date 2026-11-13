@@ -1,16 +1,18 @@
 // TespitPro statik site üretici: `node uret.js` -> docs/
-// Google İşletme verisi (puan, yorum sayısı, yorumlar) her derlemede Places API'den tazelenir.
+// İçerik: icerik.json (tek kaynak). Google İşletme verisi (puan, yorum sayısı, yorumlar) her derlemede Places API'den tazelenir.
 const fs = require("fs"), path = require("path");
+const J = JSON.parse(fs.readFileSync(path.join(__dirname, "icerik.json"), "utf8"));
+const F = J.firma;
 
 // ---- Sabitler (alan adı alınınca yalnız SITE değişir) ----
-const SITE = "https://bycasuz.github.io/tespitpro/";
-const TEL = "+905413730069", TEL_GOR = "0541 373 00 69";
-const WA = "https://wa.me/905413730069?text=" + encodeURIComponent("Merhaba, su kaçağı tespiti için bilgi almak istiyorum.");
-const MAPS = "https://maps.google.com/?cid=11539754779874183849";
-const YORUM_YAZ = "https://search.google.com/local/writereview?placeid=ChIJu-e2S3qlyhQRqUqEAdVxJaA";
-const PLACE_ID = "ChIJu-e2S3qlyhQRqUqEAdVxJaA";
-const ADRES = "Şirinevler Mah. Yeşilbağ Sk. No:11 D:A, 34188 Bahçelievler / İstanbul";
-const INDEXNOW = "7f3c9a1e5b2d4c6e8a0b1d3f5e7a9c2b";
+const SITE = F.site;
+const TEL = F.tel, TEL_GOR = F.telGor;
+const WA = "https://wa.me/905413730069?text=" + encodeURIComponent(F.waMesaj);
+const MAPS = F.mapsCid;
+const YORUM_YAZ = F.yorumYaz;
+const PLACE_ID = F.placeId;
+const ADRES = F.adres;
+const INDEXNOW = F.indexnow;
 const GSC_META = fs.existsSync(path.join(__dirname, "gsc-meta.txt")) ? fs.readFileSync(path.join(__dirname, "gsc-meta.txt"), "utf8").trim() : "";
 const esc = (t) => String(t || "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 let G = { puan: 5, yorum: 42, yorumlar: [] };
@@ -30,25 +32,19 @@ const resim = (ad, alt, { genis = "(max-width:980px) 100vw, 50vw", oncelik = fal
 // ---- Schema ----
 const isletme = () => ({
   "@context": "https://schema.org", "@type": "Plumber", "@id": SITE + "#isletme",
-  name: "TespitPro", slogan: "Kaçağı var, biz buluruz!", url: SITE, telephone: TEL,
+  name: F.ad, slogan: F.slogan, url: SITE, telephone: TEL,
   image: [SITE + "img/og.jpg", SITE + "img/termal-duvar-1600.webp"], logo: SITE + "logo.svg",
-  description: "Bahçelievler Şirinevler merkezli; termal kamera, akustik dinleme ve kamerayla kırmadan su kaçağı tespiti ve noktasal onarım. 7/24 hizmet.",
-  address: { "@type": "PostalAddress", streetAddress: "Şirinevler Mah. Yeşilbağ Sk. No:11 D:A", addressLocality: "Bahçelievler", addressRegion: "İstanbul", postalCode: "34188", addressCountry: "TR" },
-  geo: { "@type": "GeoCoordinates", latitude: 40.9978802, longitude: 28.8465744 },
+  description: F.tanitim,
+  address: { "@type": "PostalAddress", streetAddress: F.adresKisa, addressLocality: F.ilce, addressRegion: F.il, postalCode: F.postaKodu, addressCountry: "TR" },
+  geo: { "@type": "GeoCoordinates", latitude: F.enlem, longitude: F.boylam },
   openingHoursSpecification: [{ "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], opens: "00:00", closes: "23:59" }],
-  areaServed: ["Bahçelievler", "Şirinevler", "Esenler", "Yenibosna", "Güngören", "Bakırköy", "Bağcılar"].map((n) => ({ "@type": "Place", name: n + ", İstanbul" })),
+  areaServed: F.alanlar.map((n) => ({ "@type": "Place", name: n + ", İstanbul" })),
   hasMap: MAPS, sameAs: [MAPS],
-  makesOffer: ["Kırmadan su kaçağı tespiti", "Termal kamera ile su kaçağı tespiti", "Akustik dinleme ile su kaçağı tespiti", "Kameralı gider ve boru inceleme", "Noktasal su kaçağı onarımı", "Tıkanıklık açma"].map((n) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: n } })),
+  makesOffer: F.hizmetler.map((n) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: n } })),
 });
 
 // ---- Ortak bölümler ----
-const SSS_ORTAK = [
-  ["Su kaçağı olduğunu nasıl anlarım?", "En sık işaretler: su faturasının sebepsiz yükselmesi, bütün musluklar kapalıyken sayacın dönmesi, alt kata su inmesi, duvarda veya zeminde nem, kabarma ve küf lekesi."],
-  ["Kırmadan tespit nasıl yapılıyor?", "Termal kamerayla duvar ve zemindeki ısı farkını, akustik dinleme cihazıyla borudaki kaçağın sesini takip ediyoruz; gerekirse gider ve borulara kamerayla bakıyoruz. Kaçağın noktası kesinleşmeden hiçbir yeri kırmıyoruz."],
-  ["Onarım için ne kadar yer açılıyor?", "Yalnızca kaçağın olduğu nokta açılıyor. Bütün banyoyu veya mutfağı kırmak gerekmiyor; onarımdan sonra alanı temiz bırakıyoruz."],
-  ["Gece ya da hafta sonu geliyor musunuz?", "Evet, haftanın 7 günü 24 saat çalışıyoruz. Alt kata su iniyorsa önce ana vanayı kapatın, sonra bizi arayın."],
-  ["Tespitten sonra tamiri de siz mi yapıyorsunuz?", "Evet. Kaçağın yerini size gösteriyoruz; onayınızla aynı ekip onarımı yapıyor."],
-];
+const SSS_ORTAK = J.sssOrtak;
 
 const ust = (s) => `<!doctype html>
 <html lang="tr"><head>
@@ -60,25 +56,28 @@ const ust = (s) => `<!doctype html>
 <meta property="og:title" content="${s.baslik}"><meta property="og:description" content="${s.aciklama}">
 <meta property="og:type" content="website"><meta property="og:url" content="${SITE}${s.dosya === "index.html" ? "" : s.dosya}">
 <meta property="og:image" content="${SITE}img/og.jpg"><meta property="og:locale" content="tr_TR"><meta name="twitter:card" content="summary_large_image">
-<meta name="geo.region" content="TR-34"><meta name="geo.placename" content="Bahçelievler, İstanbul"><meta name="geo.position" content="40.9978802;28.8465744">${GSC_META}
+<meta name="geo.region" content="TR-34"><meta name="geo.placename" content="Bahçelievler, İstanbul"><meta name="geo.position" content="${F.enlem};${F.boylam}">${GSC_META}
 <link rel="icon" href="logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/${s.heroFoto}-800.webp" imagesrcset="img/${s.heroFoto}-800.webp 800w, img/${s.heroFoto}-1600.webp 1600w" imagesizes="(max-width:980px) 100vw, 50vw">
 <link rel="stylesheet" href="style.css">
+${s.ekSema || ""}
 <script type="application/ld+json">${JSON.stringify(isletme())}</script>
 <script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: s.sss.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) })}</script>
 ${s.dosya === "index.html" ? "" : `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "TespitPro", item: SITE }, { "@type": "ListItem", position: 2, name: s.h1, item: SITE + s.dosya }] })}</script>`}
 </head><body>
 <a class="atla" href="#icerik">İçeriğe geç</a>
+<div class="duyuru"><span class="canli" aria-hidden="true"></span>Merkez: Şirinevler · 7/24 su kaçağı tespiti</div>
 <header class="ust" id="ust"><div class="kap">
 <a class="logo" href="./" aria-label="TespitPro ana sayfa">${IK.logo}<span>Tespit<b>pro</b></span></a>
-<nav class="menu" aria-label="Ana menü"><a href="./#yontem">Nasıl buluyoruz</a><a href="./#galeri">Sahadan</a><a href="./#yorumlar">Yorumlar</a><a href="./#bolgeler">Bölgeler</a><a href="./#sss">SSS</a></nav>
+<nav class="menu" aria-label="Ana menü"><a href="./#yontem">Nasıl buluyoruz</a><a href="./#galeri">Sahadan</a><a href="./#yorumlar">Yorumlar</a><a href="./#bolgeler">Bölgeler</a><a href="./#sss">SSS</a><a href="#talep">Talep oluştur</a></nav>
 <a class="btn btn-ana" href="tel:${TEL}">${IK.tel}<span>${TEL_GOR}</span></a>
 </div></header>
+<div class="termal-cizgi" aria-hidden="true"></div>
 <main id="icerik">`;
 
-const hero = (s) => `<section class="hero"><div class="kap">
+const heroDefault = (s) => `<section class="hero"><div class="kap">
 <div>
 <div class="cipler"><span class="cip"><span class="nokta"></span>7/24 açık · gece ve hafta sonu</span><a class="cip" href="${MAPS}"><span class="yildiz">★</span>Google ${puanY()} · ${G.yorum} yorum</a></div>
 <h1>${s.heroBaslik}</h1>
@@ -91,77 +90,122 @@ const hero = (s) => `<section class="hero"><div class="kap">
 <a class="etiket e2" href="${MAPS}" style="text-decoration:none"><span class="puan">${puanY()}</span><span><strong>Google puanı</strong>${G.yorum} gerçek yorum</span></a>
 </div></div></section>`;
 
+const hero = (s) => s.tip === "ana" ? heroSlider() : s.tip === "rehber" ? rehberHero(s) : heroDefault(s);
+
+const heroSlider = () => `<section class="hero hero-slider" aria-label="Öne çıkanlar"><div class="kap">
+<div class="cipler"><span class="cip"><span class="nokta"></span>7/24 açık · gece ve hafta sonu</span><a class="cip" href="${MAPS}"><span class="yildiz">★</span>Google ${puanY()} · ${G.yorum} yorum</a></div>
+<div class="slider" data-slider aria-roledescription="carousel" aria-label="Öne çıkanlar">
+${J.slider.map((s, i) => `<div class="slayt" role="group" aria-roledescription="slide" aria-label="${i + 1} / ${J.slider.length}"${i ? " hidden" : ""}>
+<div class="slayt-metin">${i ? `<p class="h1">${s.baslik}</p>` : `<h1>${s.baslik}</h1>`}
+<p class="giris">${s.metin}</p>
+<div class="btnler"><a class="btn btn-ana" href="tel:${TEL}">${IK.tel}Hemen ara</a><a class="btn btn-wa" href="${WA}">${IK.wa}WhatsApp'tan yaz</a></div>
+<p class="semtler">Merkez: <strong>Şirinevler</strong> · Bahçelievler, Esenler, Yenibosna, Güngören, Bakırköy</p>
+</div>
+<div class="hero-gorsel"><div class="durum-satir"><span class="kirmizi-nokta" aria-hidden="true"></span>CANLI · ${i + 1} / ${J.slider.length}</div><div class="cerceve">${resim(s.foto, s.alt, { oncelik: i === 0 })}<span class="hud">${s.etiket}</span><span class="tarama" aria-hidden="true"></span></div>
+<div class="etiket e1"><strong>Önce buluyoruz, sonra açıyoruz</strong>Kaçağın noktası kesinleşmeden hiçbir yer kırılmaz.</div>
+<a class="etiket e2" href="${MAPS}" style="text-decoration:none"><span class="puan">${puanY()}</span><span><strong>Google puanı</strong>${G.yorum} gerçek yorum</span></a>
+</div></div>`).join("\n")}
+<div class="slider-kontrol">
+<button class="sk-btn sk-onceki" type="button" aria-label="Önceki slayt">‹</button>
+<div class="noktalar">${J.slider.map((s, i) => `<button class="nokta-btn" type="button" aria-label="Slayt ${i + 1}: ${s.etiket}">${String(i + 1).padStart(2, "0")} // ${s.sekme}</button>`).join("")}</div>
+<button class="sk-btn sk-sonraki" type="button" aria-label="Sonraki slayt">›</button>
+<button class="sk-btn sk-durdur" type="button" aria-pressed="false" aria-label="Slayt geçişini durdur"><span>Durdur</span></button>
+</div>
+</div></div></section>`;
+
+const rehberHero = (s) => `<section class="hero"><div class="kap">
+<div><div class="cipler"><a class="cip" href="./">← Ana sayfa</a></div><h1>${s.h1}</h1><p class="giris">${s.giris}</p>
+<div class="btnler"><a class="btn btn-ana" href="tel:${TEL}">${IK.tel}Hemen ara</a><a class="btn btn-wa" href="${WA}">${IK.wa}WhatsApp'tan yaz</a></div></div>
+<div class="hero-gorsel"><div class="cerceve">${resim(s.heroFoto, s.heroAlt, { oncelik: true })}</div></div>
+</div></section>`;
+
+const rehberGorsel = (r) => r.svg || resim(r.foto, r.alt, { genis: "(max-width:980px) 100vw, 33vw" });
+
+const rehberKart = () => `<section class="bolum" id="rehber" aria-labelledby="rh-bas" style="padding-top:0"><div class="kap">
+<div class="bolum-bas"><h2 id="rh-bas">Su kaçağı rehberi.</h2><p>Kaçağı nasıl anlarsınız, ilk ne yapmalısınız? Kısa yazılarla anlatıyoruz.</p></div>
+<div class="rehber-izgara">
+${J.rehber.map((r) => `<a class="rehber-kart" href="su-kacagi-rehberi.html#${r.slug}"><div class="rehber-gorsel">${rehberGorsel(r)}</div><h3>${r.baslik}</h3><p>${r.ozet}</p><span class="devam">Devamını oku ${IK.ok}</span></a>`).join("\n")}
+</div>
+<div class="btnler" style="margin-top:28px"><a class="btn btn-hayalet" href="su-kacagi-rehberi.html">Tüm rehber ${IK.ok}</a></div>
+</div></section>`;
+
+const rehberSayfasi = (s) => `<section class="bolum" style="padding-top:72px"><div class="kap">
+${J.rehber.map((r) => `<article class="makale" id="${r.slug}"><h2>${r.baslik}</h2><p class="makale-ozet">${r.ozet}</p><div class="makale-gorsel">${rehberGorsel(r)}</div><div class="metin">${r.paragraflar.map((p) => `<p>${p}</p>`).join("")}</div></article>`).join("\n")}
+</div></section>${sss(s.sss)}${talepFormu()}${kapanis}`;
+
+const IKON = {
+  kisi: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+  damla: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>',
+};
+const talepFormu = () => `<section class="bolum talep" id="talep" aria-labelledby="t-bas" style="padding-top:0"><div class="kap">
+<div class="bolum-bas"><h2 id="t-bas">Sorun bildir, talep oluştur.</h2><p>Formu doldurun; mesajınız WhatsApp'ta hazır açılsın. Bilgileriniz sitemizde saklanmaz.</p></div>
+<form class="talep-form" id="talepForm" novalidate>
+<div class="alan"><label for="tf-ad">Ad Soyad <span aria-hidden="true">*</span></label><div class="girdi">${IKON.kisi}<input id="tf-ad" name="ad" autocomplete="name" maxlength="80" required></div></div>
+<div class="alan"><label for="tf-tel">Telefon <span aria-hidden="true">*</span></label><div class="girdi">${IK.tel}<input id="tf-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="05xx xxx xx xx" maxlength="20" required></div></div>
+<div class="alan"><label for="tf-semt">Semt</label><div class="girdi">${IKON.pin}<select id="tf-semt" name="semt"><option value="">Seçin</option>${J.bolgeler.map((b) => `<option>${b.ad}</option>`).join("")}<option>Diğer</option></select></div></div>
+<fieldset class="alan tam"><legend>Aciliyet</legend><div class="secim-cipler"><label class="cip-sec"><input type="radio" name="zaman" value="Hemen" checked><span>Hemen</span></label><label class="cip-sec"><input type="radio" name="zaman" value="Bugün içinde"><span>Bugün içinde</span></label><label class="cip-sec"><input type="radio" name="zaman" value="Randevu"><span>Randevu</span></label></div></fieldset>
+<fieldset class="alan tam"><legend>Sorun tipi <span aria-hidden="true">*</span></legend><div class="secim-cipler">${J.talepKonulari.map((k) => `<label class="cip-sec"><input type="radio" name="konu" value="${esc(k)}"><span>${IKON.damla}${k}</span></label>`).join("")}</div><p class="hata" id="tf-konu-hata" role="alert" hidden></p></fieldset>
+<div class="alan tam"><label for="tf-acik">Açıklama</label><textarea id="tf-acik" name="aciklama" rows="4" maxlength="600" placeholder="Nerede, ne zamandır, neler görüyorsunuz?"></textarea></div>
+<p class="hata tam" id="tf-hata" role="alert" hidden></p>
+<div class="tam talep-butonlar"><button class="btn btn-wa" type="submit">${IK.wa}WhatsApp ile talebi gönder</button><button class="btn btn-lacivert" type="button" id="beniAra">${IK.tel}Beni arayın</button></div>
+</form></div></section>`;
+
+const yorumKart = (y) => `<article class="yorum-kart"><span class="yildizlar" aria-label="${y.puan} yıldız">${"★".repeat(Math.round(y.puan || 5))}</span><blockquote>${esc(y.metin.length > 360 ? y.metin.slice(0, 357) + "…" : y.metin)}</blockquote><footer><span class="bas-harf" aria-hidden="true">${esc((y.yazar || "?").trim()[0])}</span><span><strong>${esc(y.yazar)}</strong>${esc(y.once)} · <span class="google-rozet">Google</span></span></footer></article>`;
+const yorumSeridi = (l) => {
+  const satir = (liste, ters) => `<div class="serit-satir${ters ? " ters" : ""}"${ters ? ' aria-hidden="true"' : ""}><div class="serit-iz"><div class="serit-grup">${liste.map(yorumKart).join("")}</div><div class="serit-grup" aria-hidden="true">${liste.map(yorumKart).join("")}</div></div></div>`;
+  return `<div class="yorum-bant">${satir(l, false)}${satir([...l].reverse(), true)}</div>`;
+};
+
 const belirtiler = `<section class="koyu belirti" aria-labelledby="b-bas"><div class="kap">
-<div><h2 id="b-bas">Bu belirtilerden biri varsa kaçak büyümeden arayın.</h2><p class="alt">Gizli kaçak her gün hem faturanıza hem binanıza zarar verir. Erken tespit, küçük bir noktasal onarım demektir.</p><div class="termal-serit" style="max-width:220px;margin-top:28px"></div></div>
+<div><h2 id="b-bas">${J.belirtiler.baslik}</h2><p class="alt">${J.belirtiler.giris}</p><div class="termal-serit" style="max-width:220px;margin-top:28px"></div></div>
 <ol>
-<li><span>01</span><strong>Su faturası sebepsiz yükseldi</strong><p>Bütün musluklar kapalıyken sayaç dönüyorsa hatta gizli kaçak vardır.</p></li>
-<li><span>02</span><strong>Alt kata su iniyor</strong><p>Komşunun tavanında leke veya damlama; kaynak çoğu zaman banyo, mutfak ya da kombi hattıdır.</p></li>
-<li><span>03</span><strong>Duvarda nem, kabarma, küf</strong><p>Boya kabarması, sürekli ıslak süpürgelik veya küf kokusu tesisattan sızıntıya işaret eder.</p></li>
-<li><span>04</span><strong>Su basıncı düştü</strong><p>Basıncın aniden zayıflaması ya da kombinin sık su istemesi kaçak belirtisi olabilir.</p></li>
+${J.belirtiler.maddeler.map((m, i) => `<li><span>0${i + 1}</span><strong>${m.baslik}</strong><p>${m.metin}</p><div class="teshis"><b>Teşhis:</b> ${m.teshis}</div></li>`).join("\n")}
 </ol></div></section>`;
 
-const YONTEM = [
-  ["termal-duvar", "Termal kamera", "Duvar ve zemindeki sıcaklık farkını görüntüleyip sıcak ya da soğuk su hattındaki sızıntının izini sürüyoruz.", "Termal kamerayla duvardaki ısı izini takip ediyoruz"],
-  ["akustik-banyo", "Akustik dinleme", "Hassas dinleme cihazıyla basınçlı borudaki kaçağın sesini zeminin üstünden dinleyip noktasını daraltıyoruz.", "Kulaklıklı akustik cihazla banyoda kaçak sesi dinleniyor"],
-  ["termal-ekran", "Kameralı inceleme", "Gerekirse gider ve borulara kamerayla bakıyor, kırığı ve sızıntıyı ekranda size de gösteriyoruz.", "Termal kamera ekranında kaçak bölgesi görülüyor"],
-  ["noktasal-acma", "Noktasal onarım", "Kaçağın yeri kesinleşince yalnızca o noktayı açıp onarıyoruz; bütün banyo ya da mutfak kırılmıyor.", "Zeminde yalnızca kaçak noktası açılmış, boru onarımı"],
-];
 const yontemler = `<section class="bolum" id="yontem" aria-labelledby="y-bas"><div class="kap">
-<div class="bolum-bas"><h2 id="y-bas">Kaçağı nasıl<br>kırmadan buluyoruz?</h2><p>Tahminle fayans kırmıyoruz. Birden çok yöntemi birlikte kullanıp kaçağın yerini kesinleştiriyor, sonra açıyoruz.</p></div>
+<div class="bolum-bas"><h2 id="y-bas">${J.yontem.baslik}</h2><p>${J.yontem.giris}</p></div>
 <div class="yontem">
 <div class="yontem-liste" role="tablist" aria-label="Tespit yöntemleri">
-${YONTEM.map(([f, b, t, a], i) => `<button class="yontem-btn" role="tab" id="yt${i}" aria-controls="yg" aria-selected="${i === 0}" data-foto="${f}" data-alt="${esc(a)}" data-not="${esc(b)}"><span class="no">0${i + 1}</span><span><strong>${b}</strong><p>${t}</p></span></button>`).join("\n")}
+${J.yontem.maddeler.map((m, i) => `<button class="yontem-btn" role="tab" id="yt${i}" aria-controls="yg" aria-selected="${i === 0}" data-foto="${m.foto}" data-alt="${esc(m.alt)}" data-not="${esc(m.baslik)}"><span class="no">0${i + 1}</span><span><strong>${m.baslik}</strong><p>${m.metin}</p></span></button>`).join("\n")}
 </div>
-<figure class="yontem-gorsel" id="yg" role="tabpanel" aria-live="polite">${resim(YONTEM[0][0], YONTEM[0][3])}<figcaption>${YONTEM[0][1]}</figcaption></figure>
+<figure class="yontem-gorsel" id="yg" role="tabpanel" aria-live="polite">${resim(J.yontem.maddeler[0].foto, J.yontem.maddeler[0].alt)}<figcaption>${J.yontem.maddeler[0].baslik}</figcaption></figure>
 </div></div></section>`;
 
 const surec = `<section class="bolum" style="padding-top:0" aria-labelledby="s-bas"><div class="kap">
-<div class="bolum-bas"><h2 id="s-bas">Aradığınız andan<br>onarıma kadar.</h2><p>Her adımı size anlatıyor, kaçağın yerini göstermeden işe başlamıyoruz.</p></div>
+<div class="bolum-bas"><h2 id="s-bas">${J.surec.baslik}</h2><p>${J.surec.giris}</p></div>
 <ol class="surec">
-<li><strong>Arayın ya da yazın</strong><p>Belirtileri kısaca anlatın; fotoğraf göndermek isterseniz WhatsApp'tan iletin.</p></li>
-<li><strong>Adresinize gelelim</strong><p>Şirinevler'den çıkıyoruz; gece ve hafta sonu da.</p></li>
-<li><strong>Kaçağı birlikte görelim</strong><p>Cihaz ve kamerayla yeri buluyor, işaretleyip size gösteriyoruz.</p></li>
-<li><strong>Noktasal onarım</strong><p>Onayınızla yalnız o noktayı açıp onarıyor, alanı temiz bırakıyoruz.</p></li>
+${J.surec.adimlar.map((a) => `<li><strong>${a.baslik}</strong><p>${a.metin}</p></li>`).join("\n")}
 </ol></div></section>`;
 
 const galeri = `<section class="bolum koyu" id="galeri" aria-labelledby="g-bas" style="background:#0E2B4F"><div class="kap">
-<div class="bolum-bas"><h2 id="g-bas" style="color:#fff">Sahadan.</h2><p style="color:#B9C6D6">Fotoğrafların hepsi bizim işlerimizden; Google İşletme profilimizde de yayında.</p></div>
+<div class="bolum-bas"><h2 id="g-bas" style="color:#fff">${J.galeri.baslik}</h2><p style="color:#B9C6D6">${J.galeri.giris}</p></div>
 <div class="galeri">
-<figure class="g1">${resim("termal-balkon", "Ekip üyesi balkonda termal kamerayla tesisatı tarıyor", { genis: "(max-width:980px) 100vw, 58vw" })}<figcaption>Termal tarama</figcaption></figure>
-<figure class="g2">${resim("akustik-banyo", "Banyoda akustik dinleme cihazıyla kaçak aranıyor", { genis: "(max-width:980px) 50vw, 42vw" })}<figcaption>Akustik dinleme</figcaption></figure>
-<figure class="g3">${resim("noktasal-acma", "Zeminde yalnızca kaçak noktası açılmış", { genis: "(max-width:980px) 50vw, 42vw" })}<figcaption>Noktasal açma</figcaption></figure>
-<figure class="g4">${resim("termal-duvar", "Duvar dibinde termal kamerayla ölçüm", { genis: "(max-width:980px) 50vw, 34vw" })}<figcaption>Duvar içi hat</figcaption></figure>
-<figure class="g5">${resim("kanal-acma", "Tuvalet giderinde makineyle tıkanıklık açma", { genis: "(max-width:980px) 50vw, 25vw", tek: true })}<figcaption>Tıkanıklık açma</figcaption></figure>
+${J.galeri.fotolar.map((f) => `<figure class="${f.sinif}">${resim(f.foto, f.alt, { genis: f.genis, tek: !!f.tek })}<figcaption>${f.etiket}</figcaption></figure>`).join("\n")}
 </div></div></section>`;
 
 const yorumlar = () => {
   const l = (G.yorumlar || []).filter((y) => y.metin).slice(0, 8);
-  return `<section class="bolum" id="yorumlar" aria-labelledby="r-bas"><div class="kap">
+  return `<section class="bolum koyu yorum-koyu" id="yorumlar" aria-labelledby="r-bas"><div class="kap">
 <div class="bolum-bas"><div class="yorum-bas"><h2 id="r-bas">Müşterilerimiz<br>ne diyor?</h2></div>
 <a class="buyuk-puan" href="${MAPS}" style="text-decoration:none"><b>${puanY()}</b><span><span class="yildizlar" aria-label="5 üzerinden ${puanY()}">★★★★★</span><small>Google'da ${G.yorum} yorum</small></span></a></div>
-<div class="yorum-serit" tabindex="0" aria-label="Google yorumları">
-${l.map((y) => `<article class="yorum-kart"><span class="yildizlar" aria-label="${y.puan} yıldız">${"★".repeat(Math.round(y.puan || 5))}</span><blockquote>${esc(y.metin.length > 360 ? y.metin.slice(0, 357) + "…" : y.metin)}</blockquote><footer><span class="bas-harf" aria-hidden="true">${esc((y.yazar || "?").trim()[0])}</span><span><strong>${esc(y.yazar)}</strong>${esc(y.once)} · Google</span></footer></article>`).join("\n")}
-</div>
+${yorumSeridi(l)}
 <div class="btnler" style="margin-top:24px"><a class="btn btn-hayalet" href="${MAPS}">Tüm yorumlar ${IK.ok}</a><a class="btn btn-hayalet" href="${YORUM_YAZ}">Yorum yazın</a></div>
 </div></section>`;
 };
 
 const kimlere = `<section class="bolum" style="padding-top:0" aria-labelledby="k-bas"><div class="kap">
-<div class="bolum-bas"><h2 id="k-bas">Evden fabrikaya.</h2><p>Daire, dükkân ya da tesis; yöntem aynı: önce bul, sonra noktasal onar.</p></div>
+<div class="bolum-bas"><h2 id="k-bas">${J.kimlere.baslik}</h2><p>${J.kimlere.giris}</p></div>
 <div class="kimlere">
-<div><strong>Evler</strong><p>Banyo, mutfak, kombi ve yerden ısıtma hatlarındaki gizli kaçaklar.</p></div>
-<div><strong>İş yerleri</strong><p>Dükkân ve ofislerde işinizi aksatmadan, mesai dışında da tespit.</p></div>
-<div><strong>Siteler ve apartmanlar</strong><p>Bina girişi, ana hat, kolon ve ortak alan kaçakları; yönetime yerinde anlatım.</p></div>
-<div><strong>Fabrikalar</strong><p>Geniş alanlarda termal ve akustik yöntemlerle hat taraması.</p></div>
+${J.kimlere.maddeler.map((m) => `<div><strong>${m.baslik}</strong><p>${m.metin}</p></div>`).join("\n")}
 </div></div></section>`;
 
-const BOLGELER = [["Bahçelievler", "bahcelievler-su-kacagi-tespiti.html"], ["Şirinevler", "sirinevler-su-kacagi-tespiti.html"], ["Esenler", "esenler-su-kacagi-tespiti.html"], ["Yenibosna", ""], ["Güngören", ""], ["Bakırköy", ""]];
 const bolgeler = `<section class="bolum" id="bolgeler" aria-labelledby="h-bas" style="padding-top:0"><div class="kap">
 <div class="bolum-bas"><h2 id="h-bas">Hizmet bölgelerimiz.</h2><p>Merkezimiz Şirinevler Yeşilbağ Sokak'ta; çevre ilçelere kısa sürede ulaşıyoruz.</p></div>
 <div class="bolge"><nav class="bolge-liste" aria-label="Bölge sayfaları">
-${BOLGELER.map(([a, u]) => u ? `<a href="${u}">${a}<small>Su kaçağı tespiti ${IK.ok}</small></a>` : `<span>${a}<small>Hizmet veriyoruz</small></span>`).join("\n")}
+${J.bolgeler.map((b) => b.sayfa ? `<a href="${b.sayfa}">${b.ad}<small>Su kaçağı tespiti ${IK.ok}</small></a>` : `<span>${b.ad}<small>Hizmet veriyoruz</small></span>`).join("\n")}
 </nav>
-<div class="harita"><iframe loading="lazy" title="TespitPro konumu, Şirinevler" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=40.9978802,28.8465744&z=15&output=embed"></iframe></div>
+<div class="harita"><iframe loading="lazy" title="TespitPro konumu, Şirinevler" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${F.enlem},${F.boylam}&z=15&output=embed"></iframe></div>
 </div></div></section>`;
 
 const sss = (l) => `<section class="bolum" id="sss" aria-labelledby="q-bas" style="padding-top:0"><div class="kap">
@@ -171,13 +215,72 @@ const sss = (l) => `<section class="bolum" id="sss" aria-labelledby="q-bas" styl
 
 const kapanis = `<section class="kapanis"><div class="kap"><div class="kutu">
 <div><h2>Kaçağı var,<br>biz buluruz.</h2><p>Gece ya da gündüz fark etmez. Arayın, belirtileri anlatın; ne yapmanız gerektiğini telefonda söyleyelim.</p></div>
-<div><a class="tel" href="tel:${TEL}">${TEL_GOR}</a><div class="btnler"><a class="btn btn-ana" href="tel:${TEL}">${IK.tel}Hemen ara</a><a class="btn btn-wa" href="${WA}">${IK.wa}WhatsApp</a></div></div>
+<div><a class="tel" href="tel:${TEL}">${TEL_GOR}</a><div class="btnler"><a class="btn btn-ana" href="tel:${TEL}">${IK.tel}Hemen ara</a><a class="btn btn-wa" href="${WA}">${IK.wa}WhatsApp</a><a class="btn btn-hayalet-acik" href="#talep">Online talep formu</a></div></div>
 </div></div></section>`;
+
+const WA_BASE = WA.split("?")[0] + "?text=";
+const SOHBET = `<button class="sohbet-ac" id="sohbetAc" type="button" aria-expanded="false" aria-controls="sohbet">${IK.wa}<span>7/24 WhatsApp · Fotoğraf gönderin</span></button>
+<section class="sohbet" id="sohbet" role="dialog" aria-labelledby="sh-bas" hidden>
+<header class="sohbet-bas"><div><strong id="sh-bas">TespitPro</strong><span class="sohbet-durum"><span class="nokta"></span>7/24 çevrimiçi</span></div><button class="sohbet-kapat" id="sohbetKapat" type="button" aria-label="Sohbeti kapat">×</button></header>
+<div class="sohbet-govde" id="shGovde" aria-live="polite"><div class="balon gelen">Merhaba! Su kaçağı belirtinizi yazın, WhatsApp'tan ekibimize iletelim.</div></div>
+<div class="hizli">${["Alt kata su iniyor", "Su faturam yüksek", "Duvarda nem var", "Randevu almak istiyorum"].map((t) => `<button type="button">${t}</button>`).join("")}</div>
+<form class="sohbet-form" id="shForm"><label class="sr" for="shMetin">Mesajınız</label><textarea id="shMetin" rows="2" maxlength="400" placeholder="Mesajınızı yazın"></textarea><button class="btn btn-wa" type="submit">Gönder</button></form>
+</section>`;
+const SCRIPT_B = String.raw`<script>
+(function(){
+var WA_BASE="${WA_BASE}";
+var rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+function waAc(m){var a=document.createElement("a");a.href=WA_BASE+encodeURIComponent(m);a.target="_blank";a.rel="noopener";document.body.appendChild(a);a.click();a.remove()}
+var sl=document.querySelector("[data-slider]");
+if(sl){
+ var sd=[].slice.call(sl.querySelectorAll(".slayt")),nk=[].slice.call(sl.querySelectorAll(".nokta-btn")),pb=sl.querySelector(".sk-durdur"),i=0,t=null,elle=false,ustte=false,odakta=false;
+ function git(n){i=(n+sd.length)%sd.length;sd.forEach(function(s,k){s.hidden=k!==i});nk.forEach(function(b,k){b.setAttribute("aria-current",k===i?"true":"false")})}
+ function guncelle(){clearInterval(t);t=null;if(!rm&&!elle&&!ustte&&!odakta)t=setInterval(function(){git(i+1)},6000)}
+ sl.addEventListener("mouseenter",function(){ustte=true;guncelle()});
+ sl.addEventListener("mouseleave",function(){ustte=false;guncelle()});
+ sl.addEventListener("focusin",function(){odakta=true;guncelle()});
+ sl.addEventListener("focusout",function(){odakta=false;guncelle()});
+ pb.addEventListener("click",function(){elle=!elle;pb.setAttribute("aria-pressed",String(elle));pb.querySelector("span").textContent=elle?"Oynat":"Durdur";pb.setAttribute("aria-label",elle?"Slayt geçişini başlat":"Slayt geçişini durdur");guncelle()});
+ sl.querySelector(".sk-onceki").addEventListener("click",function(){git(i-1)});
+ sl.querySelector(".sk-sonraki").addEventListener("click",function(){git(i+1)});
+ nk.forEach(function(b,k){b.addEventListener("click",function(){git(k)})});
+ git(0);guncelle();
+}
+var f=document.getElementById("talepForm");
+if(f){
+ var hata=document.getElementById("tf-hata"),kh=document.getElementById("tf-konu-hata");
+ function hataGoster(el,m){hata.textContent=m;hata.hidden=false;el.focus()}
+ f.addEventListener("submit",function(e){
+  e.preventDefault();hata.hidden=true;kh.hidden=true;
+  var ad=f.ad.value.trim(),tel=f.tel.value.replace(/[\s()\-]/g,""),konu=f.querySelector('input[name="konu"]:checked');
+  if(ad.length<2)return hataGoster(f.ad,"Lütfen adınızı yazın.");
+  if(!/^(?:\+?90|0)?5\d{9}$/.test(tel))return hataGoster(f.tel,"Geçerli bir cep telefonu numarası yazın (05xx xxx xx xx).");
+  if(!konu){kh.textContent="Lütfen bir sorun tipi seçin.";kh.hidden=false;f.konu[0].focus();return}
+  var m=["Merhaba, su kaçağı için talep oluşturmak istiyorum.","Ad: "+ad,"Telefon: "+f.tel.value.trim(),"Semt: "+(f.semt.value||"Belirtilmedi"),"Sorun: "+konu.value,"Zaman: "+f.zaman.value];
+  var acik=f.aciklama.value.trim();if(acik)m.push("Açıklama: "+acik);
+  waAc(m.join("\n"));
+ });
+}
+var ba=document.getElementById("beniAra");
+if(ba)ba.addEventListener("click",function(){var ad=f.ad.value.trim(),tel=f.tel.value.trim(),m="Merhaba, beni arayın.";if(ad)m+=" Adım: "+ad+".";if(tel)m+=" Telefon: "+tel;waAc(m)});
+var sb=document.getElementById("sohbetAc");
+if(sb){
+ var sh=document.getElementById("sohbet"),sk=document.getElementById("sohbetKapat"),tx=document.getElementById("shMetin"),gv=document.getElementById("shGovde"),sf=document.getElementById("shForm");
+ function balon(m,c){var d=document.createElement("div");d.className="balon "+c;d.textContent=m;gv.appendChild(d);gv.scrollTop=gv.scrollHeight}
+ function sohbetGoster(a){sh.hidden=!a;sb.setAttribute("aria-expanded",String(a));if(a)tx.focus();else sb.focus()}
+ sb.addEventListener("click",function(){sohbetGoster(sh.hidden)});
+ sk.addEventListener("click",function(){sohbetGoster(false)});
+ document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!sh.hidden)sohbetGoster(false)});
+ [].slice.call(sh.querySelectorAll(".hizli button")).forEach(function(b){b.addEventListener("click",function(){tx.value=b.textContent;tx.focus()})});
+ sf.addEventListener("submit",function(e){e.preventDefault();var t=tx.value.trim();if(!t){tx.focus();return}balon(t,"giden");waAc(t);tx.value="";balon("WhatsApp'ta mesajınız hazır. Gönderdiğinizde ekibimiz yanıtlar.","gelen")});
+}
+})();
+</script>`;
 
 const alt = () => `</main>
 <footer class="alt-bilgi"><div class="kap">
 <div><a class="logo" href="./">${IK.logo}<span>Tespit<b>pro</b></span></a><p>Kırmadan su kaçağı tespiti ve noktasal onarım.<br>${ADRES}</p><p style="margin-top:10px"><a href="tel:${TEL}">${TEL_GOR}</a> · Her gün 24 saat</p></div>
-<div><h3>Bölgeler</h3><ul>${BOLGELER.filter((b) => b[1]).map(([a, u]) => `<li><a href="${u}">${a} su kaçağı tespiti</a></li>`).join("")}</ul></div>
+<div><h3>Bölgeler</h3><ul>${J.bolgeler.filter((b) => b.sayfa).map((b) => `<li><a href="${b.sayfa}">${b.ad} su kaçağı tespiti</a></li>`).join("")}<li><a href="su-kacagi-rehberi.html">Su kaçağı rehberi</a></li></ul></div>
 <div><h3>Google</h3><ul><li><a href="${MAPS}">Haritalar'da yol tarifi</a></li><li><a href="${MAPS}">Google yorumları (${puanY()} ★)</a></li><li><a href="${YORUM_YAZ}">Yorum yazın</a></li></ul></div>
 <p class="telif">© ${new Date().getFullYear()} TespitPro. Fotoğraflar TespitPro'ya aittir.</p>
 </div></footer>
@@ -188,6 +291,8 @@ var g=document.getElementById("yg");if(!g)return;var im=g.querySelector("img"),f
 b.forEach(function(x,i){x.addEventListener("click",function(){b.forEach(function(y){y.setAttribute("aria-selected",y===x)});var f=x.dataset.foto;im.srcset="img/"+f+"-800.webp 800w, img/"+f+"-1600.webp 1600w";im.src="img/"+f+"-800.webp";im.alt=x.dataset.alt;fc.textContent=x.dataset.not});
 x.addEventListener("keydown",function(e){var k={ArrowDown:1,ArrowRight:1,ArrowUp:-1,ArrowLeft:-1}[e.key];if(k){e.preventDefault();var n=b[(i+k+b.length)%b.length];n.focus();n.click()}})});})();
 </script>
+${SOHBET}
+${SCRIPT_B}
 </body></html>`;
 
 const bolgeMetni = (ad, paragraflar, mahalleler) => `<section class="bolum" aria-labelledby="m-bas"><div class="kap">
@@ -195,44 +300,16 @@ const bolgeMetni = (ad, paragraflar, mahalleler) => `<section class="bolum" aria
 <div class="metin">${paragraflar.map((p) => `<p>${p}</p>`).join("")}<div class="mahalleler">${mahalleler.map((m) => `<span>${m}</span>`).join("")}</div></div>
 </div></section>`;
 
-const SAYFALAR = [
-  { dosya: "index.html", baslik: "TespitPro | Kırmadan Su Kaçağı Tespiti · Bahçelievler, Şirinevler · 7/24",
-    aciklama: "Termal kamera ve akustik dinleme ile kırmadan su kaçağı tespiti, noktasal onarım. Bahçelievler, Şirinevler, Esenler · 7/24 · 0541 373 00 69.",
-    h1: "Kırmadan su kaçağı tespiti", heroBaslik: "Kaçağı var,<br><em>biz buluruz.</em>",
-    giris: "Su kaçağını termal kamera ve akustik dinlemeyle kırmadan buluyor, yalnızca o noktayı açıp onarıyoruz. Gece gündüz, haftanın her günü.",
-    heroFoto: "akustik-banyo", heroAlt: "TespitPro ekibi banyoda akustik dinleme cihazıyla su kaçağı arıyor",
-    govde: () => belirtiler + yontemler + surec + galeri + yorumlar() + kimlere + bolgeler + sss(SSS_ORTAK) + kapanis, sss: SSS_ORTAK },
-  { dosya: "bahcelievler-su-kacagi-tespiti.html", baslik: "Bahçelievler Su Kaçağı Tespiti | Kırmadan, 7/24 · TespitPro",
-    aciklama: "Bahçelievler'de termal kamera ve akustik cihazla kırmadan su kaçağı tespiti, noktasal onarım. 7/24 · 0541 373 00 69.",
-    h1: "Bahçelievler su kaçağı tespiti", heroBaslik: "Bahçelievler'de<br><em>su kaçağı tespiti.</em>",
-    giris: "Bahçelievler'in tüm mahallelerinde kaçağı termal kamera ve akustik dinlemeyle kırmadan buluyoruz. Merkezimiz Şirinevler'de; gece ve hafta sonu da geliyoruz.",
-    heroFoto: "termal-balkon", heroAlt: "Bahçelievler'de bir apartmanda termal kamerayla tesisat taraması",
-    govde: (s) => bolgeMetni("Bahçelievler", [
-      "Bahçelievler'deki apartmanların önemli bir kısmında tesisat yıllar içinde yenilenmediği için gizli kaçaklar sık görülüyor. En sık karşılaştığımız durumlar: banyodan alt kata su sızması, mutfak tezgâhı altındaki bağlantılardan sızıntı, kombi hattındaki kaçaklar ve bina girişindeki ana hat kaçakları.",
-      "Kaçağın yerini termal kamera, akustik dinleme ve gerekirse kamerayla kesinleştirdiğimiz için bütün banyoyu veya mutfağı kırmak gerekmiyor; yalnızca kaçağın olduğu nokta açılıp onarılıyor.",
-    ], ["Şirinevler", "Bahçelievler Merkez", "Siyavuşpaşa", "Kocasinan", "Yenibosna", "Soğanlı", "Zafer", "Cumhuriyet", "Hürriyet", "Fevzi Çakmak", "Çobançeşme"]) + belirtiler + yontemler + yorumlar() + sss(s.sss) + kapanis,
-    sss: [["Bahçelievler'e ne kadar sürede geliyorsunuz?", "Merkezimiz Şirinevler'de olduğu için Bahçelievler içindeki adreslere genellikle kısa sürede ulaşıyoruz; trafik durumuna göre telefonda net süre veriyoruz."], ...SSS_ORTAK] },
-  { dosya: "sirinevler-su-kacagi-tespiti.html", baslik: "Şirinevler Su Kaçağı Tespiti | Mahallenizdeyiz · TespitPro",
-    aciklama: "Şirinevler'de kırmadan su kaçağı tespiti ve noktasal onarım. Merkezimiz Yeşilbağ Sokak'ta; 7/24 · 0541 373 00 69.",
-    h1: "Şirinevler su kaçağı tespiti", heroBaslik: "Şirinevler'de<br><em>mahallenizdeyiz.</em>",
-    giris: "Merkezimiz Şirinevler Yeşilbağ Sokak'ta. Mahalle içindeki adreslere çoğu zaman dakikalar içinde ulaşıyor, kaçağı cihaz ve kamerayla kırmadan buluyoruz.",
-    heroFoto: "termal-duvar", heroAlt: "Şirinevler'de bir dairede duvar dibinde termal kamerayla ölçüm",
-    govde: (s) => bolgeMetni("Şirinevler", [
-      "Şirinevler'deki eski ve yoğun yapılaşmış binalarda alt kata su sızması ve kolon hattı kaçakları sık görülüyor. Komşunuzdan \"tavanımıza su geliyor\" uyarısı aldıysanız kaynağı bulmadan fayans kırdırmayın.",
-      "Önce termal kamerayla ısı izini, akustik cihazla kaçağın sesini takip ediyor; kaçağın tam noktasını işaretleyip size gösteriyoruz. Onarım için yalnız o nokta açılıyor.",
-    ], ["Kazım Karabekir Caddesi", "Mahmutbey Caddesi", "Yeşilbağ Sokak çevresi", "Yenibosna sınırı", "Bahçelievler sınırı"]) + belirtiler + yontemler + yorumlar() + sss(s.sss) + kapanis,
-    sss: [["Şirinevler'de acil durumda gelir misiniz?", "Evet. Merkezimiz Şirinevler'de olduğu için gece de dahil hızlıca geliyoruz; alt kata su iniyorsa önce ana vanayı kapatıp bizi arayın."], ...SSS_ORTAK] },
-  { dosya: "esenler-su-kacagi-tespiti.html", baslik: "Esenler Su Kaçağı Tespiti | Kırmadan, 7/24 · TespitPro",
-    aciklama: "Esenler'de termal kamera ve akustik cihazla kırmadan su kaçağı tespiti, alt kata su sızması ve noktasal onarım. 7/24 · 0541 373 00 69.",
-    h1: "Esenler su kaçağı tespiti", heroBaslik: "Esenler'de<br><em>su kaçağı tespiti.</em>",
-    giris: "Esenler'de alt kata su sızması, yüksek su faturası ve duvardaki nem için kaçağı cihazla kırmadan buluyor, aynı ekiple onarıyoruz.",
-    heroFoto: "termal-balkon", heroAlt: "Termal kamerayla bina tesisatında kaçak taraması",
-    govde: (s) => bolgeMetni("Esenler", [
-      "Esenler'deki müşterilerimizden en sık aldığımız çağrı alt kata su inmesi. Bir müşterimizin evinde sabah erken saatlerde alt kata su iniyordu; pazar günü gidip kaçağı cihazla bulduk ve onarımını yaptık.",
-      "Kaçağı bulmadan fayans veya duvar kırmak hem masraflı hem de çoğu zaman yanlış yeri açmak demek. Biz önce dinleyip termal kamerayla bakıyor, yalnızca kaçağın olduğu noktayı açıyoruz.",
-    ], ["Esenler'in tüm mahalleleri", "Güngören sınırı", "Bağcılar sınırı"]) + belirtiler + yontemler + yorumlar() + sss(s.sss) + kapanis,
-    sss: [["Esenler'e de geliyor musunuz?", "Evet, Esenler'in tüm mahallelerine geliyoruz. Merkezimiz Şirinevler'de, Esenler'e yakın mesafede."], ...SSS_ORTAK] },
-];
+const SAYFALAR = [...J.sayfalar, J.rehberSayfa].map((ham) => {
+  const rehber = ham.tip === "rehber";
+  const s = { ...ham, sss: rehber ? J.rehber.map((r) => [r.baslik, r.ozet]) : [...ham.sssEk, ...SSS_ORTAK] };
+  if (rehber) s.ekSema = `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "Article", headline: ham.h1, description: ham.aciklama, image: SITE + "img/termal-ekran-1600.webp", mainEntityOfPage: SITE + ham.dosya, publisher: { "@type": "Organization", name: F.ad, logo: { "@type": "ImageObject", url: SITE + "logo.svg" } } })}</script>`;
+  s.govde = () => s.tip === "ana"
+    ? belirtiler + yontemler + surec + galeri + rehberKart() + yorumlar() + kimlere + bolgeler + sss(SSS_ORTAK) + talepFormu() + kapanis
+    : rehber ? rehberSayfasi(s)
+    : bolgeMetni(s.bolge, s.paragraflar, s.mahalleler) + belirtiler + yontemler + yorumlar() + sss(s.sss) + talepFormu() + kapanis;
+  return s;
+});
 
 (async () => {
   try {
